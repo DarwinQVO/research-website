@@ -14,6 +14,7 @@ export default function HeroSection() {
   const [isTypingName, setIsTypingName] = useState(false);
   const [showArrows, setShowArrows] = useState(false);
   const [expandedBelief, setExpandedBelief] = useState<string | null>(null);
+  const [isHoveringBelief, setIsHoveringBelief] = useState(false);
   const researcherRef = useRef<HTMLSpanElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
   
