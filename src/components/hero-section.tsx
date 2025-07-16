@@ -183,11 +183,12 @@ export default function HeroSection() {
               
               <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative"
                    onMouseLeave={() => {
-                     closeTimeoutRef.current = setTimeout(() => {
-                       if (!isHoveringPopup) {
+                     if (!isHoveringPopup) {
+                       closeTimeoutRef.current = setTimeout(() => {
                          setShowPopup(false);
-                       }
-                     }, 800);
+                         setIsHoveringPopup(false);
+                       }, 300);
+                     }
                    }}>
                 <p>
                   I&apos;m a{' '}
@@ -220,10 +221,11 @@ export default function HeroSection() {
                       setIsHoveringPopup(true);
                     }}
                     onMouseLeave={() => {
+                      setIsHoveringPopup(false);
                       closeTimeoutRef.current = setTimeout(() => {
                         setShowPopup(false);
                         setIsHoveringPopup(false);
-                      }, 500);
+                      }, 300);
                     }}
                   >
                     {/* Arrow pointing down to "researcher" */}
