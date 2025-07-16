@@ -103,21 +103,25 @@ export default function HeroSection() {
   }, [showPopup]);
 
 
-  // Prevent horizontal scrollbar when quotes expand
+  // Force prevent any horizontal scrollbar
   useEffect(() => {
-    if (expandedBelief) {
-      document.documentElement.style.overflowX = 'hidden';
-      document.body.style.overflowX = 'hidden';
-    } else {
-      document.documentElement.style.overflowX = 'hidden';
-      document.body.style.overflowX = 'hidden';
-    }
+    document.documentElement.style.overflowX = 'hidden';
+    document.documentElement.style.maxWidth = '100vw';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.maxWidth = '100vw';
     
-    return () => {
+    // Also prevent on window resize
+    const preventScroll = () => {
       document.documentElement.style.overflowX = 'hidden';
       document.body.style.overflowX = 'hidden';
     };
-  }, [expandedBelief]);
+    
+    window.addEventListener('resize', preventScroll);
+    
+    return () => {
+      window.removeEventListener('resize', preventScroll);
+    };
+  }, []);
 
   // Keyboard navigation
   useEffect(() => {
@@ -168,7 +172,7 @@ export default function HeroSection() {
   return (
     <section className="w-full min-h-screen flex py-8 lg:py-0" style={{ backgroundColor: '#F3F1EB', scrollBehavior: 'auto', overflowX: 'hidden' }}>
       <div className="w-full" style={{ overflowAnchor: 'none' }}>
-        <div className="lg:relative lg:flex lg:min-h-screen grid grid-cols-1 lg:grid-cols-1 gap-8 overflow-x-hidden">
+        <div className="lg:relative lg:flex lg:min-h-screen grid grid-cols-1 lg:grid-cols-1 gap-8" style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
           {/* Left Column - Text */}
           <div className="flex flex-col px-6 md:px-8 lg:pl-16 lg:pr-8 lg:min-h-screen lg:justify-start lg:py-16 lg:w-1/2" style={{ maxWidth: '100%', overflow: 'hidden' }}>
             <div className="w-full lg:max-w-none" style={{ maxWidth: '460px' }}>
