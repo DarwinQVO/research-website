@@ -218,8 +218,11 @@ export default function HeroSection() {
                 {showPopup && (
                   <div 
                     ref={popupRef}
-                    className="absolute -top-[200px] left-0 w-[320px] min-h-[180px] bg-white border border-slate-200 rounded-lg shadow-lg p-4 z-50"
-                    style={{ transformOrigin: 'bottom center' }}
+                    className="absolute left-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col"
+                    style={{ 
+                      bottom: '35px',
+                      minHeight: '180px'
+                    }}
                     onMouseEnter={() => {
                       if (closeTimeoutRef.current) {
                         clearTimeout(closeTimeoutRef.current);
@@ -234,12 +237,8 @@ export default function HeroSection() {
                       }, 300);
                     }}
                   >
-                    {/* Arrow pointing down to "researcher" */}
-                    <div className="absolute top-full left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-slate-200"></div>
-                    <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
-                    
-                    {/* Definition content - flexible height */}
-                    <div className="pb-12">
+                    {/* Definition content - grows upward */}
+                    <div className="flex-1 p-4 pb-2">
                       <div className="flex items-start gap-3">
                         <img 
                           src={definitions[currentDefinition].icon} 
@@ -258,34 +257,41 @@ export default function HeroSection() {
                       </div>
                     </div>
                     
-                    {/* Navigation dots - positioned absolutely at bottom */}
-                    {definitions.length > 1 && (
-                      <div className="absolute bottom-4 left-4 flex items-center gap-1">
-                        {definitions.map((_, index) => (
-                          <button 
-                            key={index}
-                            onClick={() => setCurrentDefinition(index)}
-                            className={`w-2 h-2 rounded-full transition-all ${
-                              index === currentDefinition 
-                                ? 'bg-blue-600' 
-                                : 'bg-slate-300 hover:bg-slate-400'
-                            }`}
-                            aria-label={`Go to definition ${index + 1}`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                    
-                    {/* View source link - positioned absolutely at bottom right */}
-                    <a 
-                      href={definitions[currentDefinition].url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute bottom-4 right-4 text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
-                    >
-                      View source
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                    {/* Fixed bottom section with controls */}
+                    <div className="flex items-center justify-between p-4 pt-2 border-t border-slate-100">
+                      {/* Navigation dots */}
+                      {definitions.length > 1 && (
+                        <div className="flex items-center gap-1">
+                          {definitions.map((_, index) => (
+                            <button 
+                              key={index}
+                              onClick={() => setCurrentDefinition(index)}
+                              className={`w-2 h-2 rounded-full transition-all ${
+                                index === currentDefinition 
+                                  ? 'bg-blue-600' 
+                                  : 'bg-slate-300 hover:bg-slate-400'
+                              }`}
+                              aria-label={`Go to definition ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* View source link */}
+                      <a 
+                        href={definitions[currentDefinition].url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
+                      >
+                        View source
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+
+                    {/* Arrow pointing down to "researcher" */}
+                    <div className="absolute -bottom-[8px] left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-l-transparent border-r-transparent border-b-slate-200"></div>
+                    <div className="absolute -bottom-[7px] left-[60px] w-0 h-0 border-l-[7px] border-r-[7px] border-b-[7px] border-l-transparent border-r-transparent border-b-white"></div>
                   </div>
                 )}
                 
