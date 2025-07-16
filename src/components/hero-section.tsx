@@ -289,18 +289,18 @@ export default function HeroSection() {
                       </a>
                     </div>
 
-                    {/* Connection line to researcher word */}
-                    <svg className="absolute bottom-4 -left-[280px] w-[280px] h-[100px]">
+                    {/* Connection line to researcher word - fixed at top */}
+                    <svg className="absolute top-4 -left-[280px] w-[280px] h-[100px]">
                       <path 
-                        d="M 0 50 Q 140 20 280 80" 
+                        d="M 0 80 Q 140 20 280 50" 
                         stroke="#3b82f6" 
                         strokeWidth="1.5" 
                         fill="none"
                         strokeDasharray="3,3"
                         opacity="0.6"
                       />
-                      <circle cx="0" cy="50" r="2" fill="#3b82f6" opacity="0.8" />
-                      <circle cx="280" cy="80" r="2" fill="#3b82f6" opacity="0.8" />
+                      <circle cx="0" cy="80" r="2" fill="#3b82f6" opacity="0.8" />
+                      <circle cx="280" cy="50" r="2" fill="#3b82f6" opacity="0.8" />
                     </svg>
                   </div>
                 )}
