@@ -184,15 +184,7 @@ export default function HeroSection() {
                 </span>
               </h1>
               
-              <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative"
-                   onMouseLeave={() => {
-                     if (!isHoveringPopup) {
-                       closeTimeoutRef.current = setTimeout(() => {
-                         setShowPopup(false);
-                         setIsHoveringPopup(false);
-                       }, 300);
-                     }
-                   }}>
+              <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative">
                 <p>
                   I&apos;m a{' '}
                   <span 
@@ -203,7 +195,13 @@ export default function HeroSection() {
                         clearTimeout(closeTimeoutRef.current);
                       }
                       setShowPopup(true);
-                      setIsHoveringPopup(true);
+                    }}
+                    onMouseLeave={() => {
+                      closeTimeoutRef.current = setTimeout(() => {
+                        if (!isHoveringPopup) {
+                          setShowPopup(false);
+                        }
+                      }, 300);
                     }}
                   >
                     researcher
@@ -312,7 +310,7 @@ export default function HeroSection() {
                     
                     {/* Caro's Expanded Quote */}
                     {expandedBelief === 'caro' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px', width: '100%', overflowX: 'hidden' }}>
+                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px' }}>
                         <div className="flex items-start gap-3">
                           <img 
                             src={beliefs.caro.icon}
@@ -366,7 +364,7 @@ export default function HeroSection() {
                     
                     {/* Expanded Quotes - empujan contenido hacia abajo solo en columna izquierda */}
                     {expandedBelief === 'hamming' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm transition-all duration-300 ease-out pointer-events-none" style={{ maxWidth: '350px', width: '100%', overflowX: 'hidden' }}>
+                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px' }}>
                         <div className="flex items-start gap-3">
                           <img 
                             src={beliefs.hamming.icon}
@@ -389,7 +387,7 @@ export default function HeroSection() {
                     )}
                     
                     {expandedBelief === 'tufte' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm transition-all duration-300 ease-out pointer-events-none" style={{ maxWidth: '350px', width: '100%', overflowX: 'hidden' }}>
+                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px' }}>
                         <div className="flex items-start gap-3">
                           <img 
                             src={beliefs.tufte.icon}
