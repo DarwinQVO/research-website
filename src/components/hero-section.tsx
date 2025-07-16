@@ -218,7 +218,7 @@ export default function HeroSection() {
                 {showPopup && (
                   <div 
                     ref={popupRef}
-                    className="absolute -top-[220px] left-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg p-4 z-50"
+                    className="absolute -top-[220px] left-0 w-[320px] h-[200px] bg-white border border-slate-200 rounded-lg shadow-lg p-4 z-50"
                     onMouseEnter={() => {
                       if (closeTimeoutRef.current) {
                         clearTimeout(closeTimeoutRef.current);
@@ -237,21 +237,23 @@ export default function HeroSection() {
                     <div className="absolute top-full left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-slate-200"></div>
                     <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
                     
-                    {/* Definition content */}
-                    <div className="flex items-start gap-3 pb-8">
-                      <img 
-                        src={definitions[currentDefinition].icon} 
-                        alt={definitions[currentDefinition].source}
-                        className="w-6 h-6 rounded-full object-cover flex-shrink-0 mt-0.5"
-                      />
-                      <div className="flex-1">
-                        <span className="text-xs text-slate-500 font-medium mb-1 block">{definitions[currentDefinition].source}</span>
-                        <span 
-                          className="text-sm text-slate-700 leading-relaxed whitespace-pre-line block"
-                          dangerouslySetInnerHTML={{
-                            __html: definitions[currentDefinition].text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                          }}
+                    {/* Definition content - scrollable if needed */}
+                    <div className="h-[140px] overflow-y-auto">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={definitions[currentDefinition].icon} 
+                          alt={definitions[currentDefinition].source}
+                          className="w-6 h-6 rounded-full object-cover flex-shrink-0 mt-0.5"
                         />
+                        <div className="flex-1">
+                          <span className="text-xs text-slate-500 font-medium mb-1 block">{definitions[currentDefinition].source}</span>
+                          <span 
+                            className="text-sm text-slate-700 leading-relaxed whitespace-pre-line block"
+                            dangerouslySetInnerHTML={{
+                              __html: definitions[currentDefinition].text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
                     
