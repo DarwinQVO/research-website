@@ -106,13 +106,16 @@ export default function HeroSection() {
   // Prevent horizontal scrollbar when quotes expand
   useEffect(() => {
     if (expandedBelief) {
+      document.documentElement.style.overflowX = 'hidden';
       document.body.style.overflowX = 'hidden';
     } else {
-      document.body.style.overflowX = 'auto';
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
     }
     
     return () => {
-      document.body.style.overflowX = 'auto';
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
     };
   }, [expandedBelief]);
 
@@ -163,7 +166,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="w-full min-h-screen flex py-8 lg:py-0 overflow-x-hidden" style={{ backgroundColor: '#F3F1EB', scrollBehavior: 'auto' }}>
+    <section className="w-full min-h-screen flex py-8 lg:py-0" style={{ backgroundColor: '#F3F1EB', scrollBehavior: 'auto', overflowX: 'hidden' }}>
       <div className="w-full" style={{ overflowAnchor: 'none' }}>
         <div className="lg:relative lg:flex lg:min-h-screen grid grid-cols-1 lg:grid-cols-1 gap-8 overflow-x-hidden">
           {/* Left Column - Text */}
@@ -183,10 +186,12 @@ export default function HeroSection() {
               
               <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative"
                    onMouseLeave={() => {
-                     closeTimeoutRef.current = setTimeout(() => {
-                       setShowPopup(false);
-                       setIsHoveringPopup(false);
-                     }, 1000);
+                     if (!isHoveringPopup) {
+                       closeTimeoutRef.current = setTimeout(() => {
+                         setShowPopup(false);
+                         setIsHoveringPopup(false);
+                       }, 300);
+                     }
                    }}>
                 <p>
                   I&apos;m a{' '}
@@ -223,7 +228,7 @@ export default function HeroSection() {
                       closeTimeoutRef.current = setTimeout(() => {
                         setShowPopup(false);
                         setIsHoveringPopup(false);
-                      }, 1000);
+                      }, 300);
                     }}
                   >
                     {/* Arrow pointing down to "researcher" */}
