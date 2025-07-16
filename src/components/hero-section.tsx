@@ -238,7 +238,7 @@ export default function HeroSection() {
                     <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
                     
                     {/* Definition content */}
-                    <div className="flex items-start gap-3 mb-3">
+                    <div className="flex items-start gap-3 pb-8">
                       <img 
                         src={definitions[currentDefinition].icon} 
                         alt={definitions[currentDefinition].source}
@@ -255,36 +255,34 @@ export default function HeroSection() {
                       </div>
                     </div>
                     
-                    {/* Navigation dots and link */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {definitions.length > 1 && (
-                          <div className="flex items-center gap-1">
-                            {definitions.map((_, index) => (
-                              <button 
-                                key={index}
-                                onClick={() => setCurrentDefinition(index)}
-                                className={`w-2 h-2 rounded-full transition-all ${
-                                  index === currentDefinition 
-                                    ? 'bg-blue-600' 
-                                    : 'bg-slate-300 hover:bg-slate-400'
-                                }`}
-                                aria-label={`Go to definition ${index + 1}`}
-                              />
-                            ))}
-                          </div>
-                        )}
+                    {/* Navigation dots - positioned absolutely at bottom */}
+                    {definitions.length > 1 && (
+                      <div className="absolute bottom-4 left-4 flex items-center gap-1">
+                        {definitions.map((_, index) => (
+                          <button 
+                            key={index}
+                            onClick={() => setCurrentDefinition(index)}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                              index === currentDefinition 
+                                ? 'bg-blue-600' 
+                                : 'bg-slate-300 hover:bg-slate-400'
+                            }`}
+                            aria-label={`Go to definition ${index + 1}`}
+                          />
+                        ))}
                       </div>
-                      <a 
-                        href={definitions[currentDefinition].url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
-                      >
-                        View source
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
+                    )}
+                    
+                    {/* View source link - positioned absolutely at bottom right */}
+                    <a 
+                      href={definitions[currentDefinition].url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-4 right-4 text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
+                    >
+                      View source
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 )}
                 
