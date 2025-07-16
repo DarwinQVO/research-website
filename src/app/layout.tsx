@@ -30,22 +30,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Premium Research Services | Strategic Insights & Analysis",
+  title: "Eugenio Castro | Research",
   description: "Transform your business with world-class research services. We deliver comprehensive market analysis, consumer insights, and strategic intelligence for industry leaders.",
   keywords: "research services, market analysis, consumer insights, business intelligence, strategic consulting, competitive analysis",
-  authors: [{ name: "Research Excellence Team" }],
+  authors: [{ name: "Eugenio Castro" }],
   viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   openGraph: {
-    title: "Premium Research Services | Strategic Insights & Analysis",
+    title: "Eugenio Castro | Research",
     description: "Transform your business with world-class research services. We deliver comprehensive market analysis, consumer insights, and strategic intelligence for industry leaders.",
     type: "website",
     locale: "en_US",
-    siteName: "Research Excellence",
+    siteName: "Eugenio Castro Research",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Premium Research Services | Strategic Insights & Analysis",
+    title: "Eugenio Castro | Research",
     description: "Transform your business with world-class research services. We deliver comprehensive market analysis, consumer insights, and strategic intelligence for industry leaders.",
   },
 };
@@ -59,9 +59,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <link rel="canonical" href="https://research-excellence.pages.dev" />
+        <link rel="canonical" href="https://eugeniocastro.com" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${crimsonText.variable} ${inter.variable} antialiased`}
