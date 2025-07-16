@@ -218,7 +218,7 @@ export default function HeroSection() {
                 {showPopup && (
                   <div 
                     ref={popupRef}
-                    className="absolute right-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col"
+                    className="absolute right-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col-reverse"
                     style={{ 
                       top: '-120px',
                       minHeight: '180px'
@@ -257,8 +257,8 @@ export default function HeroSection() {
                       </div>
                     </div>
                     
-                    {/* Fixed bottom section with controls */}
-                    <div className="flex items-center justify-between p-4 pt-2 border-t border-slate-100">
+                    {/* Fixed bottom section with controls - now appears at bottom due to flex-col-reverse */}
+                    <div className="flex items-center justify-between p-4 pt-2 border-t border-slate-100 order-last">
                       {/* Navigation dots */}
                       {definitions.length > 1 && (
                         <div className="flex items-center gap-1">
@@ -290,18 +290,17 @@ export default function HeroSection() {
                     </div>
 
                     {/* Connection line to researcher word */}
-                    <div className="absolute top-1/2 -left-2 w-2 h-[1px] bg-slate-300"></div>
-                    <div className="absolute top-1/2 -left-[20px] w-4 h-[1px] bg-slate-300"></div>
-                    
-                    {/* Curved connection to researcher */}
-                    <svg className="absolute top-1/2 -left-[120px] w-[100px] h-[60px]" style={{ transform: 'translateY(-50%)' }}>
+                    <svg className="absolute bottom-4 -left-[280px] w-[280px] h-[100px]">
                       <path 
-                        d="M 0 30 Q 50 0 100 30" 
-                        stroke="#cbd5e1" 
-                        strokeWidth="1" 
+                        d="M 0 50 Q 140 20 280 80" 
+                        stroke="#3b82f6" 
+                        strokeWidth="1.5" 
                         fill="none"
-                        strokeDasharray="2,2"
+                        strokeDasharray="3,3"
+                        opacity="0.6"
                       />
+                      <circle cx="0" cy="50" r="2" fill="#3b82f6" opacity="0.8" />
+                      <circle cx="280" cy="80" r="2" fill="#3b82f6" opacity="0.8" />
                     </svg>
                   </div>
                 )}
