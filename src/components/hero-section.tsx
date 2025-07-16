@@ -220,7 +220,7 @@ export default function HeroSection() {
                     ref={popupRef}
                     className="absolute left-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col"
                     style={{ 
-                      bottom: '35px',
+                      top: '-200px',
                       minHeight: '180px'
                     }}
                     onMouseEnter={() => {
@@ -290,8 +290,8 @@ export default function HeroSection() {
                     </div>
 
                     {/* Arrow pointing down to "researcher" */}
-                    <div className="absolute -bottom-[8px] left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-l-transparent border-r-transparent border-b-slate-200"></div>
-                    <div className="absolute -bottom-[7px] left-[60px] w-0 h-0 border-l-[7px] border-r-[7px] border-b-[7px] border-l-transparent border-r-transparent border-b-white"></div>
+                    <div className="absolute top-full left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-slate-200"></div>
+                    <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
                   </div>
                 )}
                 
