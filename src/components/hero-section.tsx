@@ -239,7 +239,12 @@ export default function HeroSection() {
                       />
                       <div className="flex-1">
                         <span className="text-xs text-slate-500 font-medium mb-1 block">{definitions[currentDefinition].source}</span>
-                        <span className="text-sm text-slate-700 leading-relaxed whitespace-pre-line block">{definitions[currentDefinition].text}</span>
+                        <span 
+                          className="text-sm text-slate-700 leading-relaxed whitespace-pre-line block"
+                          dangerouslySetInnerHTML={{
+                            __html: definitions[currentDefinition].text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                          }}
+                        />
                       </div>
                     </div>
                     
