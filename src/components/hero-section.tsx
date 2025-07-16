@@ -218,7 +218,7 @@ export default function HeroSection() {
                 {showPopup && (
                   <div 
                     ref={popupRef}
-                    className="absolute -top-[220px] left-0 w-[320px] h-[200px] bg-white border border-slate-200 rounded-lg shadow-lg p-4 z-50"
+                    className="absolute bottom-[35px] left-0 w-[320px] min-h-[180px] bg-white border border-slate-200 rounded-lg shadow-lg p-4 z-50"
                     onMouseEnter={() => {
                       if (closeTimeoutRef.current) {
                         clearTimeout(closeTimeoutRef.current);
@@ -234,11 +234,11 @@ export default function HeroSection() {
                     }}
                   >
                     {/* Arrow pointing down to "researcher" */}
-                    <div className="absolute top-full left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-slate-200"></div>
-                    <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
+                    <div className="absolute -bottom-[8px] left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-l-transparent border-r-transparent border-b-slate-200"></div>
+                    <div className="absolute -bottom-[7px] left-[60px] w-0 h-0 border-l-[7px] border-r-[7px] border-b-[7px] border-l-transparent border-r-transparent border-b-white"></div>
                     
-                    {/* Definition content - scrollable if needed */}
-                    <div className="h-[140px] overflow-y-auto">
+                    {/* Definition content - flexible height */}
+                    <div className="pb-12">
                       <div className="flex items-start gap-3">
                         <img 
                           src={definitions[currentDefinition].icon} 
