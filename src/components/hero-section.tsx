@@ -213,6 +213,7 @@ export default function HeroSection() {
                   . These are my beliefs:
                 </p>
                 
+                
                 {/* Popup positioned next to title but connected to researcher word */}
                 {showPopup && (
                   <div 
@@ -287,20 +288,6 @@ export default function HeroSection() {
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
-
-                    {/* Connection line to researcher word - above text */}
-                    <svg className="absolute top-4 -left-[280px] w-[280px] h-[60px] z-10">
-                      <path 
-                        d="M 0 10 Q 140 -10 280 30" 
-                        stroke="#3b82f6" 
-                        strokeWidth="1.5" 
-                        fill="none"
-                        strokeDasharray="3,3"
-                        opacity="0.6"
-                      />
-                      <circle cx="0" cy="10" r="2" fill="#3b82f6" opacity="0.8" />
-                      <circle cx="280" cy="30" r="2" fill="#3b82f6" opacity="0.8" />
-                    </svg>
                   </div>
                 )}
                 
@@ -311,7 +298,7 @@ export default function HeroSection() {
                     <span className="text-slate-600">Turn every page.</span>
                   </div>
                   
-                  <div className="relative"
+                  <div className="relative inline-block"
                        onMouseEnter={() => {
                          setExpandedBelief('caro');
                          setIsHoveringBelief(true);
@@ -320,12 +307,8 @@ export default function HeroSection() {
                          setExpandedBelief(null);
                          setIsHoveringBelief(false);
                        }}>
-                    <div className="flex items-start gap-1 flex-wrap">
-                      <span className="text-slate-600 font-medium">(</span>
-                      <span className="text-blue-600 font-medium border-b border-dashed border-blue-400 hover:border-blue-600 transition-colors cursor-pointer">
-                        Caro
-                      </span>
-                      <span className="text-slate-600 font-medium">)</span>
+                    <div className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors inline-block">
+                      {expandedBelief === 'caro' ? 'Robert Caro' : 'Caro'}
                     </div>
                     
                     {/* Caro's Expanded Quote */}
@@ -358,28 +341,24 @@ export default function HeroSection() {
                     <span className="text-slate-600">Less is more.</span>
                   </div>
                   
-                  <div className="relative"
+                  <div className="relative inline-block mt-1"
                        onMouseLeave={() => {
                          setExpandedBelief(null);
                        }}>
-                    <div className="flex items-start gap-1 flex-wrap mt-1">
-                      <span className="text-slate-600 font-medium">(</span>
-                      <span 
-                        className="text-blue-600 font-medium border-b border-dashed border-blue-400 hover:border-blue-600 transition-colors cursor-pointer"
+                    <div className="flex items-center gap-2">
+                      <div 
+                        className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
                         onMouseEnter={() => setExpandedBelief('hamming')}
                       >
-                        Hamming
-                      </span>
-                      <span className="text-slate-600 font-medium">)</span>
-                      <span className="text-slate-600 mx-1">|</span>
-                      <span className="text-slate-600 font-medium">(</span>
-                      <span 
-                        className="text-blue-600 font-medium border-b border-dashed border-blue-400 hover:border-blue-600 transition-colors cursor-pointer"
+                        {expandedBelief === 'hamming' ? 'Richard Hamming' : 'Hamming'}
+                      </div>
+                      <span className="text-slate-400">|</span>
+                      <div 
+                        className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
                         onMouseEnter={() => setExpandedBelief('tufte')}
                       >
-                        Tufte
-                      </span>
-                      <span className="text-slate-600 font-medium">)</span>
+                        {expandedBelief === 'tufte' ? 'Edward Tufte' : 'Tufte'}
+                      </div>
                     </div>
                     
                     {/* Expanded Quotes - empujan contenido hacia abajo solo en columna izquierda */}
