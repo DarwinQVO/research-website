@@ -17,6 +17,7 @@ export default function HeroSection() {
   const [isHoveringBelief, setIsHoveringBelief] = useState(false);
   const researcherRef = useRef<HTMLSpanElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const fullText = "Hi, I am";
   const fullName = "Eugenio.";
@@ -101,6 +102,20 @@ export default function HeroSection() {
     }
   }, [showPopup]);
 
+
+  // Prevent horizontal scrollbar when quotes expand
+  useEffect(() => {
+    if (expandedBelief) {
+      document.body.style.overflowX = 'hidden';
+    } else {
+      document.body.style.overflowX = 'auto';
+    }
+    
+    return () => {
+      document.body.style.overflowX = 'auto';
+    };
+  }, [expandedBelief]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -148,12 +163,12 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="w-full min-h-screen flex items-center py-8 lg:py-0" style={{ backgroundColor: '#F3F1EB' }}>
-      <div className="w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-x-48 xl:gap-x-64 items-start">
+    <section className="w-full min-h-screen flex py-8 lg:py-0 overflow-x-hidden" style={{ backgroundColor: '#F3F1EB', scrollBehavior: 'auto' }}>
+      <div className="w-full" style={{ overflowAnchor: 'none' }}>
+        <div className="lg:relative lg:flex lg:min-h-screen grid grid-cols-1 lg:grid-cols-1 gap-8 overflow-x-hidden">
           {/* Left Column - Text */}
-          <div className="flex flex-col px-6 md:px-8 lg:pl-16 lg:pr-8">
-            <div className="w-full">
+          <div className="flex flex-col px-6 md:px-8 lg:pl-16 lg:pr-8 lg:min-h-screen lg:justify-start lg:py-16 lg:w-1/2" style={{ maxWidth: '100%', overflow: 'hidden' }}>
+            <div className="w-full lg:max-w-none" style={{ maxWidth: '460px' }}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight font-semibold text-slate-900 mb-6">
                 <span className="inline-block">
                   {displayedText}
@@ -166,22 +181,25 @@ export default function HeroSection() {
                 </span>
               </h1>
               
-              <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative">
+              <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative"
+                   onMouseLeave={() => {
+                     closeTimeoutRef.current = setTimeout(() => {
+                       if (!isHoveringPopup) {
+                         setShowPopup(false);
+                       }
+                     }, 800);
+                   }}>
                 <p>
                   I&apos;m a{' '}
                   <span 
                     ref={researcherRef}
                     className="relative inline-block cursor-pointer text-blue-600 font-medium hover:text-blue-700 transition-colors border-b border-dashed border-blue-400 hover:border-blue-600"
                     onMouseEnter={() => {
+                      if (closeTimeoutRef.current) {
+                        clearTimeout(closeTimeoutRef.current);
+                      }
                       setShowPopup(true);
-                      setIsHoveringPopup(false);
-                    }}
-                    onMouseLeave={() => {
-                      setTimeout(() => {
-                        if (!isHoveringPopup) {
-                          setShowPopup(false);
-                        }
-                      }, 150);
+                      setIsHoveringPopup(true);
                     }}
                   >
                     researcher
@@ -190,24 +208,90 @@ export default function HeroSection() {
                   . These are my beliefs:
                 </p>
                 
+                {/* Popup positioned outside of p tag to fix hydration error */}
+                {showPopup && (
+                  <div 
+                    ref={popupRef}
+                    className="absolute -top-[220px] left-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg p-4 z-50"
+                    onMouseEnter={() => {
+                      if (closeTimeoutRef.current) {
+                        clearTimeout(closeTimeoutRef.current);
+                      }
+                      setIsHoveringPopup(true);
+                    }}
+                    onMouseLeave={() => {
+                      closeTimeoutRef.current = setTimeout(() => {
+                        setShowPopup(false);
+                        setIsHoveringPopup(false);
+                      }, 500);
+                    }}
+                  >
+                    {/* Arrow pointing down to "researcher" */}
+                    <div className="absolute top-full left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-slate-200"></div>
+                    <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
+                    
+                    {/* Definition content */}
+                    <div className="flex items-start gap-3 mb-3">
+                      <img 
+                        src={definitions[currentDefinition].icon} 
+                        alt={definitions[currentDefinition].source}
+                        className="w-6 h-6 rounded-full object-cover flex-shrink-0 mt-0.5"
+                      />
+                      <div className="flex-1">
+                        <span className="text-xs text-slate-500 font-medium mb-1 block">{definitions[currentDefinition].source}</span>
+                        <span className="text-sm text-slate-700 leading-relaxed whitespace-pre-line block">{definitions[currentDefinition].text}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Navigation dots and link */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        {definitions.length > 1 && (
+                          <div className="flex items-center gap-1">
+                            {definitions.map((_, index) => (
+                              <button 
+                                key={index}
+                                onClick={() => setCurrentDefinition(index)}
+                                className={`w-2 h-2 rounded-full transition-all ${
+                                  index === currentDefinition 
+                                    ? 'bg-blue-600' 
+                                    : 'bg-slate-300 hover:bg-slate-400'
+                                }`}
+                                aria-label={`Go to definition ${index + 1}`}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <a 
+                        href={definitions[currentDefinition].url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
+                      >
+                        View source
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                )}
+                
                 {/* Beliefs List */}
-                <div className="mt-6 space-y-2">
+                <div className="mt-6 space-y-2" style={{ overflowAnchor: 'none' }}>
                   <div className="flex items-start gap-2">
                     <span className="text-slate-600 font-medium">1)</span>
                     <span className="text-slate-600">Turn every page.</span>
                   </div>
                   
-                  <div 
-                    className="relative"
-                    onMouseEnter={() => {
-                      setExpandedBelief('caro');
-                      setIsHoveringBelief(true);
-                    }}
-                    onMouseLeave={() => {
-                      setExpandedBelief(null);
-                      setIsHoveringBelief(false);
-                    }}
-                  >
+                  <div className="relative"
+                       onMouseEnter={() => {
+                         setExpandedBelief('caro');
+                         setIsHoveringBelief(true);
+                       }}
+                       onMouseLeave={() => {
+                         setExpandedBelief(null);
+                         setIsHoveringBelief(false);
+                       }}>
                     <div className="flex items-start gap-1 flex-wrap">
                       <span className="text-slate-600 font-medium">(</span>
                       <span className="text-blue-600 font-medium border-b border-dashed border-blue-400 hover:border-blue-600 transition-colors cursor-pointer">
@@ -218,7 +302,7 @@ export default function HeroSection() {
                     
                     {/* Caro's Expanded Quote */}
                     {expandedBelief === 'caro' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm">
+                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '420px', width: '100%' }}>
                         <div className="flex items-start gap-3">
                           <img 
                             src={beliefs.caro.icon}
@@ -246,13 +330,10 @@ export default function HeroSection() {
                     <span className="text-slate-600">Less is more.</span>
                   </div>
                   
-                  <div 
-                    className="relative"
-                    onMouseEnter={() => {}}
-                    onMouseLeave={() => {
-                      setExpandedBelief(null);
-                    }}
-                  >
+                  <div className="relative"
+                       onMouseLeave={() => {
+                         setExpandedBelief(null);
+                       }}>
                     <div className="flex items-start gap-1 flex-wrap mt-1">
                       <span className="text-slate-600 font-medium">(</span>
                       <span 
@@ -273,9 +354,9 @@ export default function HeroSection() {
                       <span className="text-slate-600 font-medium">)</span>
                     </div>
                     
-                    {/* Expanded Quotes que empujan el contenido hacia abajo */}
+                    {/* Expanded Quotes - empujan contenido hacia abajo solo en columna izquierda */}
                     {expandedBelief === 'hamming' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm transition-all duration-300 ease-out">
+                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm transition-all duration-300 ease-out pointer-events-none" style={{ maxWidth: '420px', width: '100%' }}>
                         <div className="flex items-start gap-3">
                           <img 
                             src={beliefs.hamming.icon}
@@ -298,7 +379,7 @@ export default function HeroSection() {
                     )}
                     
                     {expandedBelief === 'tufte' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm transition-all duration-300 ease-out">
+                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm transition-all duration-300 ease-out pointer-events-none" style={{ maxWidth: '420px', width: '100%' }}>
                         <div className="flex items-start gap-3">
                           <img 
                             src={beliefs.tufte.icon}
@@ -322,93 +403,6 @@ export default function HeroSection() {
                   </div>
                 </div>
                 
-                {showPopup && (
-                        <div 
-                          ref={popupRef}
-                          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 z-50 w-60"
-                          onMouseEnter={() => setIsHoveringPopup(true)}
-                          onMouseLeave={() => {
-                            setIsHoveringPopup(false);
-                            setShowPopup(false);
-                          }}
-                        >
-                        
-                        {/* Arrow pointer */}
-                        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-r border-b border-slate-200/50"></div>
-                        
-                        {/* Popup content - more compact */}
-                        <div className="bg-white/95 backdrop-blur-sm border border-slate-200/50 rounded-lg shadow-lg overflow-hidden">
-                          {/* Navigation arrows - appear initially then fade */}
-                          <div className={`absolute top-3 right-3 flex gap-2 z-10 transition-opacity duration-500 ${
-                            showArrows ? 'opacity-100' : 'opacity-0'
-                          }`}>
-                            <button
-                              onClick={() => {
-                                setCurrentDefinition((prev) => (prev - 1 + definitions.length) % definitions.length);
-                                setShowArrows(true);
-                                setTimeout(() => setShowArrows(false), 1000);
-                              }}
-                              className="w-4 h-4 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors"
-                            >
-                              ←
-                            </button>
-                            <button
-                              onClick={() => {
-                                setCurrentDefinition((prev) => (prev + 1) % definitions.length);
-                                setShowArrows(true);
-                                setTimeout(() => setShowArrows(false), 1000);
-                              }}
-                              className="w-4 h-4 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors"
-                            >
-                              →
-                            </button>
-                          </div>
-                          
-                          {/* Definition content - closer spacing */}
-                          <a
-                            href={definitions[currentDefinition].url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block p-4 hover:bg-slate-50/50 transition-colors duration-200 cursor-pointer group"
-                          >
-                            <div className="text-slate-600 text-xs leading-relaxed mb-1">
-                              {definitions[currentDefinition].text.split('\n').map((line, index) => (
-                                <div key={index} className={index === 0 ? "font-medium" : ""}>
-                                  {line.split('**').map((part, partIndex) => 
-                                    partIndex % 2 === 1 ? (
-                                      <strong key={partIndex}>{part}</strong>
-                                    ) : (
-                                      part
-                                    )
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                            
-                            <div className="flex items-center gap-2 pt-1">
-                              {definitions[currentDefinition].icon.startsWith('http') ? (
-                                <img 
-                                  src={definitions[currentDefinition].icon} 
-                                  alt={definitions[currentDefinition].source}
-                                  className="w-4 h-4 object-cover rounded-full"
-                                  onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                  }}
-                                />
-                              ) : (
-                                <span className="text-sm">
-                                  {definitions[currentDefinition].icon}
-                                </span>
-                              )}
-                              <cite className="text-[10px] text-slate-500 not-italic font-medium">
-                                {definitions[currentDefinition].source}
-                              </cite>
-                              <ExternalLink className="w-2.5 h-2.5 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
-                            </div>
-                          </a>
-                        </div>
-                        </div>
-                    )}
               </div>
               
               <Link
@@ -439,10 +433,11 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column - Testimonials */}
-          <div className="flex flex-col px-6 md:px-8 lg:px-0 lg:pr-16">
+          <div className="flex flex-col px-6 md:px-8 lg:px-0 lg:pr-16 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-screen lg:justify-center" style={{ minWidth: '400px', maxWidth: '500px' }}>
             <div 
               className="overflow-y-auto h-[400px] sm:h-[500px] lg:h-[580px] pr-2 space-y-2"
               aria-label="Customer testimonials"
+              style={{ width: '100%' }}
             >
               {testimonials.map((testimonial, index) => (
                 <div 
@@ -451,7 +446,10 @@ export default function HeroSection() {
                     index % 2 === 0 ? 'border-slate-100' : 'bg-slate-50/50 border-slate-200'
                   } border rounded-xl shadow-sm p-4 lg:p-5`}
                   style={{
-                    backgroundColor: index % 2 === 0 ? '#F3F1EB' : 'rgba(248, 250, 252, 0.5)'
+                    backgroundColor: index % 2 === 0 ? '#F3F1EB' : 'rgba(248, 250, 252, 0.5)',
+                    width: '100%',
+                    minWidth: '350px',
+                    maxWidth: '450px'
                   }}
                 >
                   <div className="flex gap-3 lg:gap-4 items-center mb-3">
