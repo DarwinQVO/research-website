@@ -214,13 +214,13 @@ export default function HeroSection() {
                   . These are my beliefs:
                 </p>
                 
-                {/* Popup positioned outside of p tag to fix hydration error */}
+                {/* Popup positioned next to title but connected to researcher word */}
                 {showPopup && (
                   <div 
                     ref={popupRef}
-                    className="absolute left-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col"
+                    className="absolute right-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col"
                     style={{ 
-                      top: '-200px',
+                      top: '-120px',
                       minHeight: '180px'
                     }}
                     onMouseEnter={() => {
@@ -289,9 +289,20 @@ export default function HeroSection() {
                       </a>
                     </div>
 
-                    {/* Arrow pointing down to "researcher" */}
-                    <div className="absolute top-full left-[60px] w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-slate-200"></div>
-                    <div className="absolute top-full left-[60px] translate-y-[-1px] w-0 h-0 border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-white"></div>
+                    {/* Connection line to researcher word */}
+                    <div className="absolute top-1/2 -left-2 w-2 h-[1px] bg-slate-300"></div>
+                    <div className="absolute top-1/2 -left-[20px] w-4 h-[1px] bg-slate-300"></div>
+                    
+                    {/* Curved connection to researcher */}
+                    <svg className="absolute top-1/2 -left-[120px] w-[100px] h-[60px]" style={{ transform: 'translateY(-50%)' }}>
+                      <path 
+                        d="M 0 30 Q 50 0 100 30" 
+                        stroke="#cbd5e1" 
+                        strokeWidth="1" 
+                        fill="none"
+                        strokeDasharray="2,2"
+                      />
+                    </svg>
                   </div>
                 )}
                 
