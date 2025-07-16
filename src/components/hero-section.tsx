@@ -8,17 +8,12 @@ export default function HeroSection() {
   const [showPopup, setShowPopup] = useState(false);
   const [currentDefinition, setCurrentDefinition] = useState(0);
   const [isHoveringPopup, setIsHoveringPopup] = useState(false);
-  const [popupPosition, setPopupPosition] = useState<'top' | 'bottom' | 'left' | 'right'>('top');
   const [displayedText, setDisplayedText] = useState('');
   const [displayedName, setDisplayedName] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   const [isTypingName, setIsTypingName] = useState(false);
   const [showArrows, setShowArrows] = useState(false);
-  const [popupTop, setPopupTop] = useState(0);
-  const [popupLeft, setPopupLeft] = useState(0);
-  const [connectorPath, setConnectorPath] = useState('');
   const [expandedBelief, setExpandedBelief] = useState<string | null>(null);
-  const [isHoveringBelief, setIsHoveringBelief] = useState(false);
   const researcherRef = useRef<HTMLSpanElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
   
@@ -91,39 +86,6 @@ export default function HeroSection() {
       setIsTypingName(false);
     }
   }, [displayedName, isTypingName, fullName]);
-
-  // Simple positioning near the word
-  const findNearPosition = (rect: DOMRect, popupWidth: number, popupHeight: number) => {
-    // Try positions near the word in order of preference
-    const positions = [
-      // Above and slightly right
-      { x: rect.left, y: rect.top - popupHeight - 10 },
-      // Above and centered
-      { x: rect.left - (popupWidth - rect.width) / 2, y: rect.top - popupHeight - 10 },
-      // Right side
-      { x: rect.right + 10, y: rect.top - 10 },
-      // Left side
-      { x: rect.left - popupWidth - 10, y: rect.top - 10 },
-      // Below
-      { x: rect.left, y: rect.bottom + 10 }
-    ];
-    
-    // Test each position to ensure it fits in viewport
-    for (const pos of positions) {
-      if (pos.x >= 10 && 
-          pos.x + popupWidth <= window.innerWidth - 10 && 
-          pos.y >= 10 && 
-          pos.y + popupHeight <= window.innerHeight - 10) {
-        return { x: pos.x, y: pos.y };
-      }
-    }
-    
-    // Fallback: adjust to fit viewport
-    let x = Math.max(10, Math.min(rect.left, window.innerWidth - popupWidth - 10));
-    let y = Math.max(10, rect.top - popupHeight - 10);
-    
-    return { x, y };
-  };
 
   // No positioning needed - popup uses CSS positioning
 
@@ -205,7 +167,7 @@ export default function HeroSection() {
               
               <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative">
                 <p>
-                  I'm a{' '}
+                  I&apos;m a{' '}
                   <span 
                     ref={researcherRef}
                     className="relative inline-block cursor-pointer text-blue-600 font-medium hover:text-blue-700 transition-colors border-b border-dashed border-blue-400 hover:border-blue-600"
@@ -285,10 +247,9 @@ export default function HeroSection() {
                   
                   <div 
                     className="relative"
-                    onMouseEnter={() => setIsHoveringBelief(true)}
+                    onMouseEnter={() => {}}
                     onMouseLeave={() => {
                       setExpandedBelief(null);
-                      setIsHoveringBelief(false);
                     }}
                   >
                     <div className="flex items-start gap-1 flex-wrap mt-1">
@@ -501,7 +462,7 @@ export default function HeroSection() {
                     <p className="font-medium text-slate-900 text-sm lg:text-base">{testimonial.name}</p>
                   </div>
                   <p className="text-slate-700 text-sm lg:text-base leading-relaxed">
-                    "{testimonial.content}"
+                    &ldquo;{testimonial.content}&rdquo;
                   </p>
                 </div>
               ))}

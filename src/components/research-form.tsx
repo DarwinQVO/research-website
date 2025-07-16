@@ -1,15 +1,6 @@
 'use client';
 
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxGroup,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-  ComboboxTrigger,
-} from '@/components/ui/kibo-ui/combobox';
+// Removed unused Combobox imports - now using checkboxes
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -247,7 +238,7 @@ export default function ResearchForm() {
           Start Your Research Project
         </h1>
         <p className="text-balance text-muted-foreground">
-          Tell us about your research needs and we'll provide a customized solution
+          Tell us about your research needs and we&apos;ll provide a customized solution
         </p>
       </div>
 

@@ -27,7 +27,7 @@ export default function ContactPage() {
             Get Started with Premium Research
           </h1>
           <p className="text-base sm:text-lg text-neutral-600 mb-8 lg:mb-12">
-            Tell us about your research needs and we'll get back to you within 24 hours.
+            Tell us about your research needs and we&apos;ll get back to you within 24 hours.
           </p>
         </div>
 
