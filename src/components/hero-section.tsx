@@ -150,18 +150,38 @@ export default function HeroSection() {
   const testimonials = [
     {
       name: "Lenny Rachitsky",
-      content: "The difference between a good interview and a great one is preparation, and Eugenio helps me make sure I don’t miss a thing",
+      content: "The difference between a good interview and a great one is preparation, and Eugenio helps me make sure I don't miss a thing",
       image: "https://imagedelivery.net/EvWH1r9fvzmakmVsplSnog/bd4f9270-e762-4aa0-901d-bc1562ac4700/public"
     },
     {
       name: "David Perell",
-      content: "Eugenio has the learning and researching gift. He’s the one-stop shop for all things podcast research",
+      content: "Eugenio has the learning and researching gift. He's the one-stop shop for all things podcast research",
       image: "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc333aba4-058d-418c-b30f-a945b67ff7cf_1738x1738.jpeg"
     },
     {
       name: "Sam Parr",
-      content: "Eugenio is the best researcher I know. He’s a master at finding the right information and making it actionable",
+      content: "Eugenio is the best researcher I know. He's a master at finding the right information and making it actionable",
       image: "https://miro.medium.com/v2/resize:fit:1024/0*y6ZQkgFIAd2auGvP"
+    },
+    {
+      name: "Shaan Puri",
+      content: "Eugenio's research depth is incredible. He finds insights that completely transform how I approach content creation and business strategy",
+      image: "https://www.creatorlab.fm/wp-content/uploads/2020/11/Shaan-Puri-Headshot-Square.png"
+    },
+    {
+      name: "Nik Sharma",
+      content: "Working with Eugenio has elevated my understanding of market dynamics. His research methodology is systematic and thorough",
+      image: "https://pbs.twimg.com/profile_images/1524849005666131968/d-S6tHPT_400x400.png"
+    },
+    {
+      name: "Ramon Van Meer",
+      content: "Eugenio delivers research that goes beyond surface-level information. He uncovers the strategic insights that matter most",
+      image: "https://quietlight.com/wp-content/uploads/2020/10/Screen-Shot-2020-09-25-at-12.10.25-PM.png"
+    },
+    {
+      name: "Samir Chaudry",
+      content: "The quality of research Eugenio provides is exceptional. He has a unique ability to synthesize complex information into actionable insights",
+      image: "https://ascentialcdn.filespin.io/api/v1/conversion/e2ca14931f4b4a4786cd7151cf5d56ee?format=png&quality=75&crop=350,350,face&bgcolor=transparent&w=544"
     }
   ];
 
@@ -291,123 +311,131 @@ export default function HeroSection() {
                   </div>
                 )}
                 
-                {/* Beliefs List */}
-                <div className="mt-6 space-y-2" style={{ overflowAnchor: 'none' }}>
-                  <div className="flex items-start gap-2">
-                    <span className="text-slate-600 font-medium">1)</span>
-                    <span className="text-slate-600">Turn every page.</span>
-                  </div>
-                  
-                  <div className="relative inline-block"
-                       onMouseEnter={() => {
-                         setExpandedBelief('caro');
-                         setIsHoveringBelief(true);
-                       }}
-                       onMouseLeave={() => {
-                         setExpandedBelief(null);
-                         setIsHoveringBelief(false);
-                       }}>
-                    <div className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors inline-block">
-                      {expandedBelief === 'caro' ? 'Robert Caro' : 'Caro'}
+                {/* Beliefs List - Clean Research Format */}
+                <div className="mt-6 space-y-4" style={{ overflowAnchor: 'none' }}>
+                  {/* Belief 1 */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-600 font-medium">1)</span>
+                      <span className="text-slate-600">Turn every page.</span>
                     </div>
-                    
-                    {/* Caro's Expanded Quote */}
-                    {expandedBelief === 'caro' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px' }}>
-                        <div className="flex items-start gap-3">
-                          <img 
-                            src={beliefs.caro.icon}
-                            alt={beliefs.caro.name}
-                            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-                          />
-                          <div className="flex-1">
-                            <p className="text-slate-700 text-sm leading-relaxed mb-2 italic">
-                              {beliefs.caro.quote}
-                            </p>
-                            <p className="text-slate-600 text-xs leading-relaxed mb-2">
-                              {beliefs.caro.source}
-                            </p>
-                            <cite className="text-xs text-slate-500 font-medium">
-                              By {beliefs.caro.name}
-                            </cite>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-start gap-2">
-                    <span className="text-slate-600 font-medium">2)</span>
-                    <span className="text-slate-600">Less is more.</span>
-                  </div>
-                  
-                  <div className="relative inline-block mt-1"
-                       onMouseLeave={() => {
-                         setExpandedBelief(null);
-                       }}>
-                    <div className="flex items-center gap-2">
-                      <div 
-                        className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
-                        onMouseEnter={() => setExpandedBelief('hamming')}
-                      >
-                        {expandedBelief === 'hamming' ? 'Richard Hamming' : 'Hamming'}
-                      </div>
-                      <span className="text-slate-400">|</span>
-                      <div 
-                        className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
-                        onMouseEnter={() => setExpandedBelief('tufte')}
-                      >
-                        {expandedBelief === 'tufte' ? 'Edward Tufte' : 'Tufte'}
+                    <div className="ml-6 relative inline-block"
+                         onMouseEnter={() => {
+                           setExpandedBelief('caro');
+                           setIsHoveringBelief(true);
+                         }}
+                         onMouseLeave={() => {
+                           setExpandedBelief(null);
+                           setIsHoveringBelief(false);
+                         }}>
+                      <div className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors inline-block">
+                        {expandedBelief === 'caro' ? 'Robert Caro' : 'Caro'}
                       </div>
                     </div>
-                    
-                    {/* Expanded Quotes - empujan contenido hacia abajo solo en columna izquierda */}
-                    {expandedBelief === 'hamming' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px' }}>
-                        <div className="flex items-start gap-3">
-                          <img 
-                            src={beliefs.hamming.icon}
-                            alt={beliefs.hamming.name}
-                            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-                          />
-                          <div className="flex-1">
-                            <p className="text-slate-700 text-sm leading-relaxed mb-2 italic">
-                              {beliefs.hamming.quote}
-                            </p>
-                            <p className="text-slate-600 text-xs leading-relaxed mb-2">
-                              {beliefs.hamming.source}
-                            </p>
-                            <cite className="text-xs text-slate-500 font-medium">
-                              By Richard {beliefs.hamming.name}
-                            </cite>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    
-                    {expandedBelief === 'tufte' && (
-                      <div className="mt-3 p-4 bg-white/90 border border-slate-200/50 rounded-lg shadow-sm pointer-events-none" style={{ maxWidth: '350px' }}>
-                        <div className="flex items-start gap-3">
-                          <img 
-                            src={beliefs.tufte.icon}
-                            alt={beliefs.tufte.name}
-                            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-                          />
-                          <div className="flex-1">
-                            <p className="text-slate-700 text-sm leading-relaxed mb-2 italic">
-                              {beliefs.tufte.quote}
-                            </p>
-                            <p className="text-slate-600 text-xs leading-relaxed mb-2">
-                              {beliefs.tufte.source}
-                            </p>
-                            <cite className="text-xs text-slate-500 font-medium">
-                              By Edward {beliefs.tufte.name}
-                            </cite>
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
+                  
+                  {/* Caro's Evidence - Appears below when active */}
+                  {expandedBelief === 'caro' && (
+                    <div className="ml-6 p-4 bg-white/80 border-l-4 border-blue-400 rounded-r-lg shadow-sm animate-fade-in">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={beliefs.caro.icon}
+                          alt={beliefs.caro.name}
+                          className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <blockquote className="text-slate-700 text-sm leading-relaxed mb-2 italic">
+                            {beliefs.caro.quote}
+                          </blockquote>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                            <span>📖</span>
+                            <span>{beliefs.caro.source}</span>
+                          </div>
+                          <cite className="text-xs text-slate-600 font-medium">
+                            — {beliefs.caro.name}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Belief 2 */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-600 font-medium">2)</span>
+                      <span className="text-slate-600 focus:outline-none" data-belief="less-is-more" tabIndex={0}>Less is more.</span>
+                    </div>
+                    <div className="ml-6 relative inline-block"
+                         onMouseLeave={() => {
+                           setExpandedBelief(null);
+                         }}>
+                      <div className="flex items-center gap-2">
+                        <div 
+                          className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
+                          onMouseEnter={() => setExpandedBelief('hamming')}
+                        >
+                          {expandedBelief === 'hamming' ? 'Richard Hamming' : 'Hamming'}
+                        </div>
+                        <span className="text-slate-400">|</span>
+                        <div 
+                          className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
+                          onMouseEnter={() => setExpandedBelief('tufte')}
+                        >
+                          {expandedBelief === 'tufte' ? 'Edward Tufte' : 'Tufte'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Hamming's Evidence */}
+                  {expandedBelief === 'hamming' && (
+                    <div className="ml-6 p-4 bg-white/80 border-l-4 border-blue-400 rounded-r-lg shadow-sm animate-fade-in">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={beliefs.hamming.icon}
+                          alt={beliefs.hamming.name}
+                          className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <blockquote className="text-slate-700 text-sm leading-relaxed mb-2 italic">
+                            {beliefs.hamming.quote}
+                          </blockquote>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                            <span>📖</span>
+                            <span>{beliefs.hamming.source}</span>
+                          </div>
+                          <cite className="text-xs text-slate-600 font-medium">
+                            — Richard {beliefs.hamming.name}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Tufte's Evidence */}
+                  {expandedBelief === 'tufte' && (
+                    <div className="ml-6 p-4 bg-white/80 border-l-4 border-blue-400 rounded-r-lg shadow-sm animate-fade-in">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={beliefs.tufte.icon}
+                          alt={beliefs.tufte.name}
+                          className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <blockquote className="text-slate-700 text-sm leading-relaxed mb-2 italic">
+                            {beliefs.tufte.quote}
+                          </blockquote>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                            <span>📖</span>
+                            <span>{beliefs.tufte.source}</span>
+                          </div>
+                          <cite className="text-xs text-slate-600 font-medium">
+                            — Edward {beliefs.tufte.name}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 
               </div>
@@ -440,9 +468,9 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column - Testimonials */}
-          <div className="flex flex-col px-6 md:px-8 lg:px-0 lg:pr-16 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-screen lg:justify-center" style={{ minWidth: '400px', maxWidth: '500px' }}>
+          <div className="flex flex-col px-6 md:px-8 lg:px-0 lg:pr-16 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-screen lg:justify-start lg:pt-16" style={{ minWidth: '400px', maxWidth: '500px' }}>
             <div 
-              className="overflow-y-auto h-[400px] sm:h-[500px] lg:h-[580px] pr-2 space-y-2"
+              className="overflow-y-auto h-[500px] sm:h-[600px] lg:h-[calc(100vh-8rem)] pr-2 space-y-2"
               aria-label="Customer testimonials"
               style={{ width: '100%' }}
             >
