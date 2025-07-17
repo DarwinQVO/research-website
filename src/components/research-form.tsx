@@ -118,7 +118,18 @@ export default function ResearchForm() {
   }, []);
 
   const updateFormData = (field: string, value: string | string[]) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    // Input sanitization
+    let sanitizedValue = value;
+    if (typeof value === 'string') {
+      // Remove potentially dangerous characters
+      sanitizedValue = value
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+        .replace(/<[^>]*>/g, '')
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+\s*=/gi, '')
+        .trim();
+    }
+    setFormData(prev => ({ ...prev, [field]: sanitizedValue }));
   };
 
   const resetForm = () => {
