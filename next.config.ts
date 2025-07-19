@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Comentamos output: 'export' para permitir API routes
-  // output: 'export',
+  output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
@@ -10,6 +9,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 export default nextConfig;

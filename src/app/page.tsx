@@ -64,23 +64,37 @@ export default function ComingSoonPage() {
     setMessage(''); // Limpiar mensaje anterior
 
     try {
-      const response = await fetch('/api/email-signup', {
+      // Usar Airtable directamente desde el frontend
+      const airtableUrl = `https://api.airtable.com/v0/appGpvotz5u1yGsvH/Table%201`;
+      
+      const response = await fetch(airtableUrl, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer patQnEuaASu0Unnyb.eea2eb72a73645df0aa42e4e82a668f13cef74c241855c20c58921dec93119e9`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email.trim().toLowerCase() }),
+        body: JSON.stringify({
+          fields: {
+            Email: email.trim().toLowerCase(),
+          }
+        })
       });
-
-      const data = await response.json();
 
       if (response.ok) {
         setStatus('success');
-        setMessage(data.message || 'Perfect! You\'re on the list. We\'ll notify you when we launch.');
+        setMessage('Perfect! You\'re on the list. We\'ll notify you when we launch.');
         setEmail('');
       } else {
-        setStatus('error');
-        setMessage(data.error || 'Something went wrong. Please try again.');
+        const data = await response.json();
+        // Si el error es por email duplicado
+        if (data.error?.message?.includes('duplicate') || data.error?.message?.includes('INVALID_REQUEST_BODY')) {
+          setStatus('success');
+          setMessage('You\'re already on our list! We\'ll notify you when we launch.');
+          setEmail('');
+        } else {
+          setStatus('error');
+          setMessage('Something went wrong. Please try again.');
+        }
       }
     } catch (error) {
       setStatus('error');
