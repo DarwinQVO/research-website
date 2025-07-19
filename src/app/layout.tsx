@@ -30,23 +30,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eugenio Castro | Research",
-  description: "Transform your business with world-class research services. We deliver comprehensive market analysis, consumer insights, and strategic intelligence for industry leaders.",
-  keywords: "research services, market analysis, consumer insights, business intelligence, strategic consulting, competitive analysis",
+  title: "Research | Coming Soon",
+  description: "The new way to do professional research. Be the first to know about our next-generation research platform.",
+  keywords: "research services, professional research, coming soon, data analysis, market research",
   authors: [{ name: "Eugenio Castro" }],
   viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   openGraph: {
-    title: "Eugenio Castro | Research",
-    description: "Transform your business with world-class research services. We deliver comprehensive market analysis, consumer insights, and strategic intelligence for industry leaders.",
+    title: "Research | Coming Soon",
+    description: "The new way to do professional research. Be the first to know about our next-generation research platform.",
     type: "website",
     locale: "en_US",
-    siteName: "Eugenio Castro Research",
+    siteName: "Research",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eugenio Castro | Research",
-    description: "Transform your business with world-class research services. We deliver comprehensive market analysis, consumer insights, and strategic intelligence for industry leaders.",
+    title: "Research | Coming Soon",
+    description: "The new way to do professional research. Be the first to know about our next-generation research platform.",
   },
 };
 
