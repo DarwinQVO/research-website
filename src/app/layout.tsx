@@ -58,13 +58,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <link rel="canonical" href="https://eugeniocastro.com" />
+        <link rel="icon" href="/eugenio-icon.jpeg" />
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="/eugenio-icon.jpeg" />
+        <link rel="icon" type="image/jpeg" sizes="16x16" href="/eugenio-icon.jpeg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/eugenio-icon.jpeg" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="canonical" href="https://research-website.pages.dev" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${crimsonText.variable} ${inter.variable} antialiased`}
