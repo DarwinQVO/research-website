@@ -1,0 +1,510 @@
+'use client';
+
+import { ArrowRight, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import { useState, useRef, useEffect } from 'react';
+
+export default function HeroSection() {
+  const [showPopup, setShowPopup] = useState(false);
+  const [currentDefinition, setCurrentDefinition] = useState(0);
+  const [isHoveringPopup, setIsHoveringPopup] = useState(false);
+  const [displayedText, setDisplayedText] = useState('');
+  const [displayedName, setDisplayedName] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [isTypingName, setIsTypingName] = useState(false);
+  const [showArrows, setShowArrows] = useState(false);
+  const [expandedBelief, setExpandedBelief] = useState<string | null>(null);
+  const [isHoveringBelief, setIsHoveringBelief] = useState(false);
+  const researcherRef = useRef<HTMLSpanElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const fullText = "Hi, I am";
+  const fullName = "Eugenio.";
+  
+  const definitions = [
+    {
+      source: "Merriam-Webster",
+      text: "Researcher (noun)\nre·search·er | \\ ri-ˈsər-cher \\\n\n\"One who observes or studies by close examination and systematic inquiry.\"",
+      url: "https://www.merriam-webster.com/dictionary/researcher",
+      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Merriam-Webster_logo.svg/1200px-Merriam-Webster_logo.svg.png"
+    },
+    {
+      source: "Marshall McLuhan", 
+      text: "\"We are back once more in the age of the hunter. This time the hunter is a fact‑finder, a **researcher** and a discoverer.\"",
+      url: "https://en.wikipedia.org/wiki/Marshall_McLuhan",
+      icon: "https://miro.medium.com/v2/resize:fit:610/1*I5JLIox9pYCaMFfj6yEmLA.jpeg"
+    }
+  ];
+
+  const beliefs = {
+    caro: {
+      name: "Caro",
+      quote: "\"Just remember,\" he said. \"Turn every page. Never assume anything. Turn every goddamned page.\"",
+      source: "Working: Researching, Interviewing, Writing",
+      icon: "https://dims.apnews.com/dims4/default/271da34/2147483647/strip/true/crop/3000x2000+0+0/resize/599x399!/quality/90/?url=https%3A%2F%2Fstorage.googleapis.com%2Fafs-prod%2Fmedia%2F1a013a9483c84557a8452dae35311214%2F3000.jpeg",
+      url: "#"
+    },
+    hamming: {
+      name: "Hamming", 
+      quote: "\"…I am inclined to believe that, in the long-haul, books which leave out what's not essential are more important than books which tell you everything because you don't want to know everything. I don't want to know that much about penguins is the usual reply. You just want to know the essence.\"",
+      source: "You and Your Research",
+      icon: "https://alchetron.com/cdn/richard-hamming-947c76c9-7e4c-407c-a36a-bbab67c3138-resize-750.jpeg",
+      url: "#"
+    },
+    tufte: {
+      name: "Tufte",
+      quote: "\"Graphical excellence is that which gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space.\"",
+      source: "(Tufte, The Visual Display of Quantitative Information, p.51)",
+      icon: "https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.upp-prod-eu.s3.amazonaws.com%2Fb5631804-f4d3-11e2-a62e-00144feabdc0?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1",
+      url: "#"
+    }
+  };
+
+  // Typewriter effect for "Hi, I am"
+  useEffect(() => {
+    if (isTyping && displayedText.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+      }, 100);
+      return () => clearTimeout(timeout);
+    } else if (displayedText.length === fullText.length && isTyping) {
+      setIsTyping(false);
+      // Start typing "Eugenio." after a brief pause
+      setTimeout(() => {
+        setIsTypingName(true);
+      }, 300);
+    }
+  }, [displayedText, isTyping, fullText]);
+
+  // Typewriter effect for "Eugenio."
+  useEffect(() => {
+    if (isTypingName && displayedName.length < fullName.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedName(fullName.slice(0, displayedName.length + 1));
+      }, 120);
+      return () => clearTimeout(timeout);
+    } else if (displayedName.length === fullName.length && isTypingName) {
+      setIsTypingName(false);
+    }
+  }, [displayedName, isTypingName, fullName]);
+
+  // No positioning needed - popup uses CSS positioning
+
+  // Show arrows initially then fade
+  useEffect(() => {
+    if (showPopup) {
+      setShowArrows(true);
+      const timer = setTimeout(() => {
+        setShowArrows(false);
+      }, 2000); // Show for 2 seconds then fade
+      return () => clearTimeout(timer);
+    }
+  }, [showPopup]);
+
+
+  // Force prevent any horizontal scrollbar
+  useEffect(() => {
+    document.documentElement.style.overflowX = 'hidden';
+    document.documentElement.style.maxWidth = '100vw';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.maxWidth = '100vw';
+    
+    // Also prevent on window resize
+    const preventScroll = () => {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+    };
+    
+    window.addEventListener('resize', preventScroll);
+    
+    return () => {
+      window.removeEventListener('resize', preventScroll);
+    };
+  }, []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (showPopup) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          setCurrentDefinition((prev) => (prev - 1 + definitions.length) % definitions.length);
+          setShowArrows(true); // Show arrows when navigating
+          setTimeout(() => setShowArrows(false), 1000);
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          setCurrentDefinition((prev) => (prev + 1) % definitions.length);
+          setShowArrows(true); // Show arrows when navigating
+          setTimeout(() => setShowArrows(false), 1000);
+        } else if (e.key === 'Escape') {
+          setShowPopup(false);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showPopup, definitions.length]);
+
+  const testimonials = [
+    {
+      name: "Lenny Rachitsky",
+      content: "The difference between a good interview and a great one is preparation, and Eugenio helps me make sure I don't miss a thing",
+      image: "https://imagedelivery.net/EvWH1r9fvzmakmVsplSnog/bd4f9270-e762-4aa0-901d-bc1562ac4700/public"
+    },
+    {
+      name: "David Perell",
+      content: "Eugenio has the learning and researching gift. He's the one-stop shop for all things podcast research",
+      image: "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc333aba4-058d-418c-b30f-a945b67ff7cf_1738x1738.jpeg"
+    },
+    {
+      name: "Sam Parr",
+      content: "Eugenio is the best researcher I know. He's a master at finding the right information and making it actionable",
+      image: "https://miro.medium.com/v2/resize:fit:1024/0*y6ZQkgFIAd2auGvP"
+    },
+    {
+      name: "Shaan Puri",
+      content: "Eugenio's research depth is incredible. He finds insights that completely transform how I approach content creation and business strategy",
+      image: "https://www.creatorlab.fm/wp-content/uploads/2020/11/Shaan-Puri-Headshot-Square.png"
+    },
+    {
+      name: "Nik Sharma",
+      content: "Working with Eugenio has elevated my understanding of market dynamics. His research methodology is systematic and thorough",
+      image: "https://pbs.twimg.com/profile_images/1524849005666131968/d-S6tHPT_400x400.png"
+    },
+    {
+      name: "Ramon Van Meer",
+      content: "Eugenio delivers research that goes beyond surface-level information. He uncovers the strategic insights that matter most",
+      image: "https://quietlight.com/wp-content/uploads/2020/10/Screen-Shot-2020-09-25-at-12.10.25-PM.png"
+    },
+    {
+      name: "Samir Chaudry",
+      content: "The quality of research Eugenio provides is exceptional. He has a unique ability to synthesize complex information into actionable insights",
+      image: "https://ascentialcdn.filespin.io/api/v1/conversion/e2ca14931f4b4a4786cd7151cf5d56ee?format=png&quality=75&crop=350,350,face&bgcolor=transparent&w=544"
+    }
+  ];
+
+  const companies = [
+    "TechCorp", "StartupX", "GlobalTech", "DataFlow", "InnovateNow", "ResearchCo"
+  ];
+
+  return (
+    <section className="w-full min-h-screen flex py-8 lg:py-0" style={{ backgroundColor: '#F3F1EB', scrollBehavior: 'auto', overflowX: 'hidden' }}>
+      <div className="w-full" style={{ overflowAnchor: 'none' }}>
+        <div className="lg:relative lg:flex lg:min-h-screen grid grid-cols-1 lg:grid-cols-1 gap-8" style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
+          {/* Left Column - Text */}
+          <div className="flex flex-col px-6 md:px-8 lg:pl-16 lg:pr-8 lg:min-h-screen lg:justify-start lg:py-16 lg:w-1/2" style={{ maxWidth: '100%', overflow: 'hidden' }}>
+            <div className="w-full lg:max-w-none" style={{ maxWidth: '460px' }}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight font-semibold text-slate-900 mb-6">
+                <span className="inline-block">
+                  {displayedText}
+                  {isTyping && <span className="animate-pulse">|</span>}
+                </span>
+                <br />
+                <span className="text-blue-600">
+                  {displayedName}
+                  {isTypingName && <span className="animate-pulse">|</span>}
+                </span>
+              </h1>
+              
+              <div className="max-w-[460px] text-base sm:text-lg text-slate-600 mb-8 lg:mb-10 leading-relaxed relative">
+                <p>
+                  I&apos;m a{' '}
+                  <span 
+                    ref={researcherRef}
+                    className="relative inline-block cursor-pointer text-blue-600 font-medium hover:text-blue-700 transition-colors border-b border-dashed border-blue-400 hover:border-blue-600"
+                    onMouseEnter={() => {
+                      if (closeTimeoutRef.current) {
+                        clearTimeout(closeTimeoutRef.current);
+                      }
+                      setShowPopup(true);
+                    }}
+                    onMouseLeave={() => {
+                      closeTimeoutRef.current = setTimeout(() => {
+                        if (!isHoveringPopup) {
+                          setShowPopup(false);
+                        }
+                      }, 300);
+                    }}
+                  >
+                    researcher
+                  </span>
+                  . These are my beliefs:
+                </p>
+                
+                
+                {/* Popup positioned next to title but connected to researcher word */}
+                {showPopup && (
+                  <div 
+                    ref={popupRef}
+                    className="absolute right-0 w-[320px] bg-white border border-slate-200 rounded-lg shadow-lg z-50 flex flex-col-reverse"
+                    style={{ 
+                      top: '-120px',
+                      minHeight: '180px'
+                    }}
+                    onMouseEnter={() => {
+                      if (closeTimeoutRef.current) {
+                        clearTimeout(closeTimeoutRef.current);
+                      }
+                      setIsHoveringPopup(true);
+                    }}
+                    onMouseLeave={() => {
+                      setIsHoveringPopup(false);
+                      closeTimeoutRef.current = setTimeout(() => {
+                        setShowPopup(false);
+                        setIsHoveringPopup(false);
+                      }, 300);
+                    }}
+                  >
+                    {/* Definition content - grows upward */}
+                    <div className="flex-1 p-4 pb-2">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={definitions[currentDefinition].icon} 
+                          alt={definitions[currentDefinition].source}
+                          className="w-6 h-6 rounded-full object-cover flex-shrink-0 mt-0.5"
+                        />
+                        <div className="flex-1">
+                          <span className="text-xs text-slate-500 font-medium mb-1 block">{definitions[currentDefinition].source}</span>
+                          <span 
+                            className="text-sm text-slate-700 leading-relaxed whitespace-pre-line block"
+                            dangerouslySetInnerHTML={{
+                              __html: definitions[currentDefinition].text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Fixed bottom section with controls - now appears at bottom due to flex-col-reverse */}
+                    <div className="flex items-center justify-between p-4 pt-2 border-t border-slate-100 order-last">
+                      {/* Navigation dots */}
+                      {definitions.length > 1 && (
+                        <div className="flex items-center gap-1">
+                          {definitions.map((_, index) => (
+                            <button 
+                              key={index}
+                              onClick={() => setCurrentDefinition(index)}
+                              className={`w-2 h-2 rounded-full transition-all ${
+                                index === currentDefinition 
+                                  ? 'bg-blue-600' 
+                                  : 'bg-slate-300 hover:bg-slate-400'
+                              }`}
+                              aria-label={`Go to definition ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* View source link */}
+                      <a 
+                        href={definitions[currentDefinition].url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
+                      >
+                        View source
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Beliefs List - Clean Research Format */}
+                <div className="mt-6 space-y-4" style={{ overflowAnchor: 'none' }}>
+                  {/* Belief 1 */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-600 font-medium">1)</span>
+                      <span className="text-slate-600">Turn every page.</span>
+                    </div>
+                    <div className="ml-6 relative inline-block"
+                         onMouseEnter={() => {
+                           setExpandedBelief('caro');
+                           setIsHoveringBelief(true);
+                         }}
+                         onMouseLeave={() => {
+                           setExpandedBelief(null);
+                           setIsHoveringBelief(false);
+                         }}>
+                      <div className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors inline-block">
+                        {expandedBelief === 'caro' ? 'Robert Caro' : 'Caro'}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Caro's Evidence - Appears below when active */}
+                  {expandedBelief === 'caro' && (
+                    <div className="ml-6 p-4 bg-white/80 border-l-4 border-blue-400 rounded-r-lg shadow-sm animate-fade-in">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={beliefs.caro.icon}
+                          alt={beliefs.caro.name}
+                          className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <blockquote className="text-slate-700 text-sm leading-relaxed mb-2 italic">
+                            {beliefs.caro.quote}
+                          </blockquote>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                            <span>📖</span>
+                            <span>{beliefs.caro.source}</span>
+                          </div>
+                          <cite className="text-xs text-slate-600 font-medium">
+                            — {beliefs.caro.name}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Belief 2 */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-slate-600 font-medium">2)</span>
+                      <span className="text-slate-600 focus:outline-none" data-belief="less-is-more" tabIndex={0}>Less is more.</span>
+                    </div>
+                    <div className="ml-6 relative inline-block"
+                         onMouseLeave={() => {
+                           setExpandedBelief(null);
+                         }}>
+                      <div className="flex items-center gap-2">
+                        <div 
+                          className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
+                          onMouseEnter={() => setExpandedBelief('hamming')}
+                        >
+                          {expandedBelief === 'hamming' ? 'Richard Hamming' : 'Hamming'}
+                        </div>
+                        <span className="text-slate-400">|</span>
+                        <div 
+                          className="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-full text-sm font-medium cursor-pointer transition-colors"
+                          onMouseEnter={() => setExpandedBelief('tufte')}
+                        >
+                          {expandedBelief === 'tufte' ? 'Edward Tufte' : 'Tufte'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Hamming's Evidence */}
+                  {expandedBelief === 'hamming' && (
+                    <div className="ml-6 p-4 bg-white/80 border-l-4 border-blue-400 rounded-r-lg shadow-sm animate-fade-in">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={beliefs.hamming.icon}
+                          alt={beliefs.hamming.name}
+                          className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <blockquote className="text-slate-700 text-sm leading-relaxed mb-2 italic">
+                            {beliefs.hamming.quote}
+                          </blockquote>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                            <span>📖</span>
+                            <span>{beliefs.hamming.source}</span>
+                          </div>
+                          <cite className="text-xs text-slate-600 font-medium">
+                            — Richard {beliefs.hamming.name}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Tufte's Evidence */}
+                  {expandedBelief === 'tufte' && (
+                    <div className="ml-6 p-4 bg-white/80 border-l-4 border-blue-400 rounded-r-lg shadow-sm animate-fade-in">
+                      <div className="flex items-start gap-3">
+                        <img 
+                          src={beliefs.tufte.icon}
+                          alt={beliefs.tufte.name}
+                          className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <blockquote className="text-slate-700 text-sm leading-relaxed mb-2 italic">
+                            {beliefs.tufte.quote}
+                          </blockquote>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                            <span>📖</span>
+                            <span>{beliefs.tufte.source}</span>
+                          </div>
+                          <cite className="text-xs text-slate-600 font-medium">
+                            — Edward {beliefs.tufte.name}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+              </div>
+              
+              <Link
+                href="/contact"
+                className="research-hover inline-flex items-center px-6 h-[44px] bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-md transition-colors duration-200 w-fit focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+
+              {/* Logo Wall - Only under left column */}
+              <div className="mt-12 lg:mt-14 pt-8 lg:pt-10 border-t border-slate-200">
+                <p className="text-xs tracking-widest text-slate-500 mb-4 lg:mb-6 uppercase">
+                  Used by Leading Companies
+                </p>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:gap-x-8 lg:gap-y-4">
+                  {companies.map((company, index) => (
+                    <div 
+                      key={index}
+                      className="text-slate-700 opacity-70 font-medium text-sm lg:text-base hover:opacity-100 transition-opacity cursor-pointer"
+                    >
+                      {company}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Testimonials */}
+          <div className="flex flex-col px-6 md:px-8 lg:px-0 lg:pr-16 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-screen lg:justify-start lg:pt-16" style={{ minWidth: '400px', maxWidth: '500px' }}>
+            <div 
+              className="overflow-y-auto h-[500px] sm:h-[600px] lg:h-[calc(100vh-8rem)] pr-2 space-y-2"
+              aria-label="Customer testimonials"
+              style={{ width: '100%' }}
+            >
+              {testimonials.map((testimonial, index) => (
+                <div 
+                  key={index}
+                  className={`research-hover ${
+                    index % 2 === 0 ? 'border-slate-100' : 'bg-slate-50/50 border-slate-200'
+                  } border rounded-xl shadow-sm p-4 lg:p-5`}
+                  style={{
+                    backgroundColor: index % 2 === 0 ? '#F3F1EB' : 'rgba(248, 250, 252, 0.5)',
+                    width: '100%',
+                    minWidth: '350px',
+                    maxWidth: '450px'
+                  }}
+                >
+                  <div className="flex gap-3 lg:gap-4 items-center mb-3">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover flex-shrink-0"
+                    />
+                    <p className="font-medium text-slate-900 text-sm lg:text-base">{testimonial.name}</p>
+                  </div>
+                  <p className="text-slate-700 text-sm lg:text-base leading-relaxed">
+                    &ldquo;{testimonial.content}&rdquo;
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
