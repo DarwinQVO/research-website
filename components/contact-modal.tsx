@@ -5,7 +5,6 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { Badge } from './ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Twitter, Linkedin, Instagram, Globe, Youtube } from 'lucide-react';
 
 interface ContactModalProps {
@@ -28,6 +27,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   // Detectar plataforma automáticamente
   const detectSocialPlatform = (input: string): SocialPlatform => {
@@ -256,72 +256,76 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           
           <div className="space-y-2">
             <Label htmlFor="socialHandle">Main Social Handle</Label>
-            <div className="flex w-full">
-              <Select value={selectedPlatform || ''} onValueChange={(value) => setSelectedPlatform(value as SocialPlatform)}>
-                <SelectTrigger className="w-14 h-10 rounded-r-none border-r-0 px-3 justify-center">
-                  <SelectValue>
-                    {selectedPlatform ? getPlatformIcon(selectedPlatform) : <Globe className="w-4 h-4" />}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="twitter">
-                    <div className="flex items-center gap-2">
-                      <Twitter className="w-4 h-4" />
-                      <span>Twitter/X</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="linkedin">
-                    <div className="flex items-center gap-2">
-                      <Linkedin className="w-4 h-4" />
-                      <span>LinkedIn</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="instagram">
-                    <div className="flex items-center gap-2">
-                      <Instagram className="w-4 h-4" />
-                      <span>Instagram</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="youtube">
-                    <div className="flex items-center gap-2">
-                      <Youtube className="w-4 h-4" />
-                      <span>YouTube</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="other">
-                    <div className="flex items-center gap-2">
-                      <Globe className="w-4 h-4" />
-                      <span>Other</span>
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="flex items-stretch w-full relative">
+              <button
+                type="button"
+                onClick={() => setShowDropdown(!showDropdown)}
+                className="flex items-center justify-center w-8 h-10 bg-white border border-gray-300 rounded-l-md border-r-0 px-1 shrink-0 hover:bg-gray-50"
+              >
+                {selectedPlatform ? getPlatformIcon(selectedPlatform) : <Globe className="w-4 h-4 text-gray-500" />}
+              </button>
               
-              <div className="flex-1 relative">
-                <Input
-                  id="socialHandle"
-                  name="socialHandle"
-                  value={formData.socialHandle}
-                  onChange={handleChange}
-                  placeholder="@username or paste social media link"
-                  className="h-10 rounded-l-none border-l-0"
-                />
-                
-                {showConfirmation && detectedPlatform && (
-                  <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
-                    <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 flex items-center justify-center">
-                          {getPlatformIcon(detectedPlatform)}
-                        </div>
-                        <span className="text-xs font-medium">
-                          {getPlatformName(detectedPlatform)} detected!
-                        </span>
-                      </div>
-                    </Badge>
+              {showDropdown && (
+                <div className="absolute top-10 left-0 z-30 bg-white border border-gray-300 rounded-md shadow-lg min-w-32">
+                  <div 
+                    className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
+                    onClick={() => {setSelectedPlatform('twitter'); setShowDropdown(false);}}
+                  >
+                    <Twitter className="w-4 h-4" />
+                    <span className="text-sm">Twitter/X</span>
                   </div>
-                )}
-              </div>
+                  <div 
+                    className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
+                    onClick={() => {setSelectedPlatform('linkedin'); setShowDropdown(false);}}
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    <span className="text-sm">LinkedIn</span>
+                  </div>
+                  <div 
+                    className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
+                    onClick={() => {setSelectedPlatform('instagram'); setShowDropdown(false);}}
+                  >
+                    <Instagram className="w-4 h-4" />
+                    <span className="text-sm">Instagram</span>
+                  </div>
+                  <div 
+                    className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
+                    onClick={() => {setSelectedPlatform('youtube'); setShowDropdown(false);}}
+                  >
+                    <Youtube className="w-4 h-4" />
+                    <span className="text-sm">YouTube</span>
+                  </div>
+                  <div 
+                    className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
+                    onClick={() => {setSelectedPlatform('other'); setShowDropdown(false);}}
+                  >
+                    <Globe className="w-4 h-4" />
+                    <span className="text-sm">Other</span>
+                  </div>
+                </div>
+              )}
+              
+              <Input
+                id="socialHandle"
+                name="socialHandle"
+                value={formData.socialHandle}
+                onChange={handleChange}
+                placeholder="@username or paste social media link"
+                className="flex-1 h-10 rounded-l-none border-l-0"
+              />
+              
+              {showConfirmation && detectedPlatform && (
+                <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
+                  <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200">
+                    <div className="flex items-center gap-2">
+                      {getPlatformIcon(detectedPlatform)}
+                      <span className="text-xs font-medium">
+                        {getPlatformName(detectedPlatform)} detected!
+                      </span>
+                    </div>
+                  </Badge>
+                </div>
+              )}
             </div>
           </div>
           
