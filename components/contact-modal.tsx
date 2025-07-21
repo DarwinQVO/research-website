@@ -252,10 +252,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           
           <div className="space-y-2">
             <Label htmlFor="socialHandle">Main Social Handle</Label>
-            <div className="flex gap-2">
-              {/* PEQUEÑO: Selector de icono de red social */}
+            <div className="flex items-stretch w-full">
               <Select value={selectedPlatform || ''} onValueChange={(value) => setSelectedPlatform(value as SocialPlatform)}>
-                <SelectTrigger className="w-12 h-10 p-2 shrink-0 min-w-0">
+                <SelectTrigger className="w-14 h-10 rounded-r-none border-r-0 px-3 flex items-center justify-center">
                   <SelectValue>
                     {selectedPlatform ? getPlatformIcon(selectedPlatform) : <Globe className="w-4 h-4" />}
                   </SelectValue>
@@ -288,20 +287,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </SelectContent>
               </Select>
               
-              {/* GRANDE: Campo de texto para @username o link */}
-              <div className="flex-1 relative">
+              <div className="relative flex-1">
                 <Input
                   id="socialHandle"
                   name="socialHandle"
                   value={formData.socialHandle}
                   onChange={handleChange}
                   placeholder="@username or paste social media link"
-                  className="w-full"
+                  className="h-10 w-full rounded-l-none border-l-0"
                 />
                 
-                {/* Chip de confirmación */}
                 {showConfirmation && detectedPlatform && (
-                  <div className="absolute -top-8 left-0 right-0 flex justify-center">
+                  <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
                     <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
                       <div className="flex items-center gap-2">
                         {getPlatformIcon(detectedPlatform)}
@@ -317,14 +314,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="description">Describe what you need help with *</Label>
+            <Label htmlFor="description">Tell me about your project *</Label>
             <Textarea
               id="description"
               name="description"
               required
               value={formData.description}
               onChange={handleChange}
-              placeholder="Tell me about your project, research needs, timeline, and any specific areas where you'd like support..."
+              placeholder="Briefly describe how you think research can elevate your content"
               rows={5}
               className="min-h-[120px]"
             />
