@@ -15,7 +15,7 @@ export default function App() {
 
   const testimonials = [
     {
-      quote: "WIP",
+      quote: "Eugenio consistently delivers high-quality research that saves me hours of work",
       name: "Sam Parr",
       title: "My First Million",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/0_y6ZQkgFIAd2auGvP_vks35f.png",
@@ -29,7 +29,7 @@ export default function App() {
       twitterUrl: "https://x.com/lennysan"
     },
     {
-      quote: "WIP",
+      quote: "The research depth Eugenio provides gives our content the edge it needs to stand out",
       name: "Samir Chaudry",
       title: "Colin & Samir",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/e2ca14931f4b4a4786cd7151cf5d56ee_adq9hm.png",

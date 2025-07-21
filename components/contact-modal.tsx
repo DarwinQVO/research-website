@@ -31,18 +31,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   // Detectar plataforma automáticamente
   const detectSocialPlatform = (input: string): SocialPlatform => {
-    // Si no tiene indicadores de URL, retorna null
-    if (!input.includes('http') && !input.includes('www.') && !input.includes('.com') && !input.includes('twitter.com') && !input.includes('x.com') && !input.includes('linkedin.com') && !input.includes('instagram.com')) {
-      return null;
-    }
-
     const lowerInput = input.toLowerCase();
     
-    // Detección directa por contenido de string
+    // Detección directa por contenido de string - más simple y directo
+    if (lowerInput.includes('youtube.com')) return 'youtube';
     if (lowerInput.includes('twitter.com') || lowerInput.includes('x.com')) return 'twitter';
     if (lowerInput.includes('linkedin.com')) return 'linkedin';
     if (lowerInput.includes('instagram.com')) return 'instagram';
-    if (lowerInput.includes('youtube.com')) return 'youtube';
+    
+    // Si no tiene indicadores de URL, retorna null
+    if (!input.includes('http') && !input.includes('www.') && !input.includes('.com')) {
+      return null;
+    }
 
     // Fallback con URL parsing
     try {
@@ -84,6 +84,25 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       if (hostname.includes('instagram.com')) {
         const match = pathname.match(/^\/([a-zA-Z0-9_.]+)/);
         return match ? `@${match[1]}` : input;
+      }
+
+      // YouTube: extrae de /channel/ID, /@username, /c/username, o /user/username
+      if (hostname.includes('youtube.com') || hostname.includes('www.youtube.com')) {
+        // Para @username (nuevo formato)
+        const atMatch = pathname.match(/^\/@([a-zA-Z0-9_.-]+)/);
+        if (atMatch) return `@${atMatch[1]}`;
+        
+        // Para /c/username (formato canal personalizado)
+        const cMatch = pathname.match(/^\/c\/([a-zA-Z0-9_.-]+)/);
+        if (cMatch) return `@${cMatch[1]}`;
+        
+        // Para /user/username (formato antiguo)
+        const userMatch = pathname.match(/^\/user\/([a-zA-Z0-9_.-]+)/);
+        if (userMatch) return `@${userMatch[1]}`;
+        
+        // Para /channel/ID (mantener como está porque no es username legible)
+        const channelMatch = pathname.match(/^\/channel\/([a-zA-Z0-9_-]+)/);
+        if (channelMatch) return `@${channelMatch[1]}`;
       }
 
       return input;
@@ -237,6 +256,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               required
               value={formData.fullName}
               onChange={handleChange}
+              onFocus={() => setShowDropdown(false)}
               placeholder="Your full name"
             />
           </div>
@@ -250,6 +270,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               required
               value={formData.email}
               onChange={handleChange}
+              onFocus={() => setShowDropdown(false)}
               placeholder="your@email.com"
             />
           </div>
@@ -266,7 +287,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </button>
               
               {showDropdown && (
-                <div className="absolute top-10 left-0 z-30 bg-white border border-gray-300 rounded-md shadow-lg min-w-32">
+<div className="absolute top-10 left-0 z-30 bg-white border border-gray-300 rounded-md shadow-lg min-w-32">
                   <div 
                     className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
                     onClick={() => {setSelectedPlatform('twitter'); setShowDropdown(false);}}
@@ -310,6 +331,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 name="socialHandle"
                 value={formData.socialHandle}
                 onChange={handleChange}
+                onFocus={() => setShowDropdown(false)}
                 placeholder="@username or paste social media link"
                 className="flex-1 h-10 rounded-l-none border-l-0"
               />
@@ -337,6 +359,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               required
               value={formData.description}
               onChange={handleChange}
+              onFocus={() => setShowDropdown(false)}
               placeholder="Briefly describe how you think research can elevate your content"
               rows={5}
               className="min-h-[120px]"

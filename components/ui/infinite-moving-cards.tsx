@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
+import { X } from "lucide-react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -70,7 +71,7 @@ export const InfiniteMovingCards = ({
       } else if (speed === "normal") {
         containerRef.current.style.setProperty("--animation-duration", "40s");
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+        containerRef.current.style.setProperty("--animation-duration", "120s");
       }
     }
   };
@@ -102,7 +103,7 @@ export const InfiniteMovingCards = ({
                 className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               <div className="relative z-20 flex-1">
-                <span className="text-xs sm:text-sm leading-[1.6] font-normal text-gray-700">
+                <span className="text-sm sm:text-base leading-[1.6] font-normal text-gray-700">
                   &ldquo;{item.quote}&rdquo;
                 </span>
               </div>
@@ -127,6 +128,7 @@ export const InfiniteMovingCards = ({
                         {item.title}
                       </span>
                     </div>
+                    <X className="w-4 h-4 ml-2 text-gray-400" />
                   </a>
                 ) : (
                   <>
