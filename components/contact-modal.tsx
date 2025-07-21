@@ -93,18 +93,23 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setIsSubmitting(true);
 
     try {
-      // Usar API route segura en lugar de llamada directa
-      const response = await fetch('/api/contact', {
+      // Llamada directa a Airtable desde el cliente para static export
+      const airtableUrl = `https://api.airtable.com/v0/${process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID}/${process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME}`;
+      
+      const response = await fetch(airtableUrl, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AIRTABLE_PAT}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: formData.email,
-          fullName: formData.fullName,
-          socialHandle: formData.socialHandle,
-          description: formData.description,
-          platform: detectedPlatform || 'Not specified'
+          fields: {
+            Email: formData.email.trim().toLowerCase(),
+            Name: formData.fullName.trim(),
+            'Social Handle': formData.socialHandle?.trim() || '',
+            Description: formData.description?.trim() || '',
+            Platform: detectedPlatform || 'Not specified'
+          }
         })
       });
 
