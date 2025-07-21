@@ -4,7 +4,6 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Badge } from './ui/badge';
 import { Twitter, Linkedin, Instagram, Globe } from 'lucide-react';
 
@@ -24,7 +23,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   
   const [detectedPlatform, setDetectedPlatform] = useState<SocialPlatform>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<SocialPlatform>(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -120,7 +118,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           description: ''
         });
         setDetectedPlatform(null);
-        setSelectedPlatform(null);
         setShowConfirmation(false);
         
         // Cerrar modal después de 2 segundos
@@ -156,7 +153,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       if (platform) {
         const extractedUsername = extractUsernameFromUrl(value, platform);
         setDetectedPlatform(platform);
-        setSelectedPlatform(platform);
         setShowConfirmation(true);
         
         // Actualizar el valor con el username extraído
@@ -206,14 +202,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Message Sent!</h3>
-            <p className="text-gray-600 mb-4">Thank you for your inquiry. I'll get back to you within 24 hours.</p>
+            <p className="text-gray-600 mb-4">Thank you for your inquiry. I&apos;ll get back to you within 24 hours.</p>
             <div className="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
           // Formulario normal
           <>
             <DialogHeader>
-              <DialogTitle>Let's explore working together</DialogTitle>
+              <DialogTitle>Let&apos;s explore working together</DialogTitle>
               <DialogDescription>
                 Tell me about your project and how I can help you spend less time researching and more time creating.
               </DialogDescription>

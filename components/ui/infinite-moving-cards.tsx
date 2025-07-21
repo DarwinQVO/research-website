@@ -23,14 +23,9 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    addAnimation();
-  }, []);
-
   const [start, setStart] = useState(false);
 
-  function addAnimation() {
+  const addAnimation = React.useCallback(() => {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
@@ -45,7 +40,11 @@ export const InfiniteMovingCards = ({
       getSpeed();
       setStart(true);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    addAnimation();
+  }, [addAnimation]);
 
   const getDirection = () => {
     if (containerRef.current) {
@@ -91,7 +90,7 @@ export const InfiniteMovingCards = ({
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <li
             className="relative w-[280px] sm:w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-gray-200 bg-white/80 backdrop-blur-sm px-6 sm:px-8 py-4 sm:py-6 md:w-[450px] shadow-sm min-h-[140px] sm:min-h-[160px] flex"
             key={item.name}
@@ -103,7 +102,7 @@ export const InfiniteMovingCards = ({
               ></div>
               <div className="relative z-20 flex-1">
                 <span className="text-xs sm:text-sm leading-[1.6] font-normal text-gray-700">
-                  "{item.quote}"
+                  &ldquo;{item.quote}&rdquo;
                 </span>
               </div>
               <div className="relative z-20 flex flex-row items-center mt-3 sm:mt-4">

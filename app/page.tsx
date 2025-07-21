@@ -58,7 +58,7 @@ export default function App() {
           {/* Hero Section */}
           <div className="text-center space-y-4 sm:space-y-6 max-w-2xl px-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-gray-900 tracking-tight">
-              Hi. I'm Eugenio
+              Hi. I&apos;m Eugenio
             </h1>
             
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto">
@@ -86,7 +86,7 @@ export default function App() {
           {/* Call to Action */}
           <div className="text-center space-y-6 sm:space-y-8 max-w-xl px-4">
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-              I partner with a limited number of creators. Share a few details below to see if we're a match.
+              I partner with a limited number of creators. Share a few details below to see if we&apos;re a match.
             </p>
 
             <Button 
