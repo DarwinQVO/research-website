@@ -6,14 +6,14 @@ import { Label } from './ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Twitter, Linkedin, Instagram, Globe } from 'lucide-react';
+import { Twitter, Linkedin, Instagram, Globe, Youtube } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type SocialPlatform = 'twitter' | 'linkedin' | 'instagram' | 'other' | null;
+type SocialPlatform = 'twitter' | 'linkedin' | 'instagram' | 'youtube' | 'other' | null;
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [formData, setFormData] = useState({
@@ -42,6 +42,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     if (lowerInput.includes('twitter.com') || lowerInput.includes('x.com')) return 'twitter';
     if (lowerInput.includes('linkedin.com')) return 'linkedin';
     if (lowerInput.includes('instagram.com')) return 'instagram';
+    if (lowerInput.includes('youtube.com')) return 'youtube';
 
     // Fallback con URL parsing
     try {
@@ -51,6 +52,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       if (hostname.includes('twitter.com') || hostname.includes('x.com')) return 'twitter';
       if (hostname.includes('linkedin.com')) return 'linkedin';
       if (hostname.includes('instagram.com')) return 'instagram';
+      if (hostname.includes('youtube.com')) return 'youtube';
       return 'other';
     } catch {
       return null;
@@ -184,6 +186,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       case 'twitter': return <Twitter className="w-4 h-4" />;
       case 'linkedin': return <Linkedin className="w-4 h-4" />;
       case 'instagram': return <Instagram className="w-4 h-4" />;
+      case 'youtube': return <Youtube className="w-4 h-4" />;
       case 'other': return <Globe className="w-4 h-4" />;
       default: return <Globe className="w-4 h-4" />;
     }
@@ -194,6 +197,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       case 'twitter': return 'Twitter/X';
       case 'linkedin': return 'LinkedIn';
       case 'instagram': return 'Instagram';
+      case 'youtube': return 'YouTube';
       case 'other': return 'Other';
       default: return 'Select Platform';
     }
@@ -252,9 +256,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           
           <div className="space-y-2">
             <Label htmlFor="socialHandle">Main Social Handle</Label>
-            <div className="flex items-stretch w-full">
+            <div className="flex w-full">
               <Select value={selectedPlatform || ''} onValueChange={(value) => setSelectedPlatform(value as SocialPlatform)}>
-                <SelectTrigger className="w-14 h-10 rounded-r-none border-r-0 px-3 flex items-center justify-center">
+                <SelectTrigger className="w-14 h-10 rounded-r-none border-r-0 px-3 justify-center">
                   <SelectValue>
                     {selectedPlatform ? getPlatformIcon(selectedPlatform) : <Globe className="w-4 h-4" />}
                   </SelectValue>
@@ -278,6 +282,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <span>Instagram</span>
                     </div>
                   </SelectItem>
+                  <SelectItem value="youtube">
+                    <div className="flex items-center gap-2">
+                      <Youtube className="w-4 h-4" />
+                      <span>YouTube</span>
+                    </div>
+                  </SelectItem>
                   <SelectItem value="other">
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4" />
@@ -287,21 +297,23 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </SelectContent>
               </Select>
               
-              <div className="relative flex-1">
+              <div className="flex-1 relative">
                 <Input
                   id="socialHandle"
                   name="socialHandle"
                   value={formData.socialHandle}
                   onChange={handleChange}
                   placeholder="@username or paste social media link"
-                  className="h-10 w-full rounded-l-none border-l-0"
+                  className="h-10 rounded-l-none border-l-0"
                 />
                 
                 {showConfirmation && detectedPlatform && (
                   <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
                     <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
                       <div className="flex items-center gap-2">
-                        {getPlatformIcon(detectedPlatform)}
+                        <div className="w-4 h-4 flex items-center justify-center">
+                          {getPlatformIcon(detectedPlatform)}
+                        </div>
                         <span className="text-xs font-medium">
                           {getPlatformName(detectedPlatform)} detected!
                         </span>
