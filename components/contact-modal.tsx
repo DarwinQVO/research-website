@@ -252,12 +252,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           
           <div className="space-y-2">
             <Label htmlFor="socialHandle">Main Social Handle</Label>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {/* PEQUEÑO: Selector de icono de red social */}
               <Select value={selectedPlatform || ''} onValueChange={(value) => setSelectedPlatform(value as SocialPlatform)}>
-                <SelectTrigger className="w-[50px] shrink-0">
-                  <SelectValue placeholder={<Globe className="w-4 h-4" />}>
-                    {selectedPlatform && getPlatformIcon(selectedPlatform)}
+                <SelectTrigger className="w-12 h-10 p-2 shrink-0 min-w-0">
+                  <SelectValue>
+                    {selectedPlatform ? getPlatformIcon(selectedPlatform) : <Globe className="w-4 h-4" />}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
