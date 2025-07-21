@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Content Research",
+  title: "Eugenio Castro",
   description: "Research assistance for content creators. Spend less time digging and more time creating.",
   keywords: "research, content creation, podcast research, interview preparation",
   authors: [{ name: "Eugenio Castro" }],
