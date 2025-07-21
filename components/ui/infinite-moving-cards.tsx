@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { X } from "lucide-react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -128,7 +127,6 @@ export const InfiniteMovingCards = ({
                         {item.title}
                       </span>
                     </div>
-                    <X className="w-4 h-4 ml-2 text-gray-400" />
                   </a>
                 ) : (
                   <>
