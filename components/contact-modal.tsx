@@ -253,33 +253,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <div className="space-y-2">
             <Label htmlFor="socialHandle">Main Social Handle</Label>
             <div className="flex gap-3">
-              <div className="flex-1 relative">
-                <Input
-                  id="socialHandle"
-                  name="socialHandle"
-                  value={formData.socialHandle}
-                  onChange={handleChange}
-                  placeholder="@username or paste social media link"
-                  className="w-full"
-                />
-                
-                {/* Chip de confirmación */}
-                {showConfirmation && detectedPlatform && (
-                  <div className="absolute -top-8 left-0 right-0 flex justify-center">
-                    <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
-                      <div className="flex items-center gap-2">
-                        {getPlatformIcon(detectedPlatform)}
-                        <span className="text-xs font-medium">
-                          {getPlatformName(detectedPlatform)} detected!
-                        </span>
-                      </div>
-                    </Badge>
-                  </div>
-                )}
-              </div>
-              
+              {/* PEQUEÑO: Selector de icono de red social */}
               <Select value={selectedPlatform || ''} onValueChange={(value) => setSelectedPlatform(value as SocialPlatform)}>
-                <SelectTrigger className="w-[60px]">
+                <SelectTrigger className="w-[50px] shrink-0">
                   <SelectValue placeholder={<Globe className="w-4 h-4" />}>
                     {selectedPlatform && getPlatformIcon(selectedPlatform)}
                   </SelectValue>
@@ -311,6 +287,32 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   </SelectItem>
                 </SelectContent>
               </Select>
+              
+              {/* GRANDE: Campo de texto para @username o link */}
+              <div className="flex-1 relative">
+                <Input
+                  id="socialHandle"
+                  name="socialHandle"
+                  value={formData.socialHandle}
+                  onChange={handleChange}
+                  placeholder="@username or paste social media link"
+                  className="w-full"
+                />
+                
+                {/* Chip de confirmación */}
+                {showConfirmation && detectedPlatform && (
+                  <div className="absolute -top-8 left-0 right-0 flex justify-center">
+                    <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
+                      <div className="flex items-center gap-2">
+                        {getPlatformIcon(detectedPlatform)}
+                        <span className="text-xs font-medium">
+                          {getPlatformName(detectedPlatform)} detected!
+                        </span>
+                      </div>
+                    </Badge>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           

@@ -15,6 +15,7 @@ export const InfiniteMovingCards = ({
     name: string;
     title: string;
     avatar: string;
+    twitterUrl?: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -106,19 +107,44 @@ export const InfiniteMovingCards = ({
                 </span>
               </div>
               <div className="relative z-20 flex flex-row items-center mt-3 sm:mt-4">
-                <img
-                  src={item.avatar}
-                  alt={item.name}
-                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full object-cover mr-3 sm:mr-4 flex-shrink-0 ring-2 ring-gray-100"
-                />
-                <div className="flex flex-col justify-center min-h-[40px] sm:min-h-[48px]">
-                  <span className="text-xs sm:text-sm leading-[1.4] font-medium text-gray-900">
-                    {item.name}
-                  </span>
-                  <span className="text-xs sm:text-sm leading-[1.4] font-normal text-gray-500 mt-0.5">
-                    {item.title}
-                  </span>
-                </div>
+                {item.twitterUrl ? (
+                  <a 
+                    href={item.twitterUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex flex-row items-center hover:opacity-80 transition-opacity"
+                  >
+                    <img
+                      src={item.avatar}
+                      alt={item.name}
+                      className="w-10 sm:w-12 h-10 sm:h-12 rounded-full object-cover mr-3 sm:mr-4 flex-shrink-0 ring-2 ring-gray-100"
+                    />
+                    <div className="flex flex-col justify-center min-h-[40px] sm:min-h-[48px]">
+                      <span className="text-xs sm:text-sm leading-[1.4] font-medium text-gray-900">
+                        {item.name}
+                      </span>
+                      <span className="text-xs sm:text-sm leading-[1.4] font-normal text-gray-500 mt-0.5">
+                        {item.title}
+                      </span>
+                    </div>
+                  </a>
+                ) : (
+                  <>
+                    <img
+                      src={item.avatar}
+                      alt={item.name}
+                      className="w-10 sm:w-12 h-10 sm:h-12 rounded-full object-cover mr-3 sm:mr-4 flex-shrink-0 ring-2 ring-gray-100"
+                    />
+                    <div className="flex flex-col justify-center min-h-[40px] sm:min-h-[48px]">
+                      <span className="text-xs sm:text-sm leading-[1.4] font-medium text-gray-900">
+                        {item.name}
+                      </span>
+                      <span className="text-xs sm:text-sm leading-[1.4] font-normal text-gray-500 mt-0.5">
+                        {item.title}
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             </blockquote>
           </li>

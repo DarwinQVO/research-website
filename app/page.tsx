@@ -18,31 +18,36 @@ export default function App() {
       quote: "WIP",
       name: "Sam Parr",
       title: "My First Million",
-      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/0_y6ZQkgFIAd2auGvP_vks35f.png"
+      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/0_y6ZQkgFIAd2auGvP_vks35f.png",
+      twitterUrl: "https://x.com/thesamparr"
     },
     {
       quote: "The difference between a good interview and a great one is preparation, and Eugenio helps me make sure I don't miss a thing",
       name: "Lenny Rachitsky",
       title: "Lenny's Podcast",
-      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/Lenny_Image_v4lqvn.png"
+      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/Lenny_Image_v4lqvn.png",
+      twitterUrl: "https://x.com/lennysan"
     },
     {
       quote: "WIP",
       name: "Samir Chaudry",
       title: "Colin & Samir",
-      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/e2ca14931f4b4a4786cd7151cf5d56ee_adq9hm.png"
+      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/e2ca14931f4b4a4786cd7151cf5d56ee_adq9hm.png",
+      twitterUrl: "https://x.com/samirchaudry"
     },
     {
       quote: "Eugenio has the researcher/learning gift. He's detail-oriented and always delivers on time",
       name: "David Perell",
       title: "How I Write",
-      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/David_Image_ilx5my.png"
+      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/David_Image_ilx5my.png",
+      twitterUrl: "https://x.com/david_perell"
     },
     {
       quote: "Working with Eugenio is great—awesome research, hustle and energy",
       name: "Shaan Puri",
       title: "My First Million",
-      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129188/3a4b390a-084e-4c71-a81e-56bd64d4f32a_https___bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_public_images_27cf0da8-77c8-4078-990d-493291f18d77_782x898_xh2900.avif"
+      avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129188/3a4b390a-084e-4c71-a81e-56bd64d4f32a_https___bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_public_images_27cf0da8-77c8-4078-990d-493291f18d77_782x898_xh2900.avif",
+      twitterUrl: "https://x.com/ShaanVP"
     },
   ];
 
