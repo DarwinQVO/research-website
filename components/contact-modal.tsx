@@ -5,6 +5,7 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { Badge } from './ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Twitter, Linkedin, Instagram, Globe } from 'lucide-react';
 
 interface ContactModalProps {
@@ -23,6 +24,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   
   const [detectedPlatform, setDetectedPlatform] = useState<SocialPlatform>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<SocialPlatform>(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -108,7 +110,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             Name: formData.fullName.trim(),
             'Social Handle': formData.socialHandle?.trim() || '',
             Description: formData.description?.trim() || '',
-            Platform: detectedPlatform || 'Not specified'
+            Platform: selectedPlatform || detectedPlatform || 'Not specified'
           }
         })
       });
@@ -123,6 +125,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           description: ''
         });
         setDetectedPlatform(null);
+        setSelectedPlatform(null);
         setShowConfirmation(false);
         
         // Cerrar modal después de 2 segundos
@@ -158,6 +161,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       if (platform) {
         const extractedUsername = extractUsernameFromUrl(value, platform);
         setDetectedPlatform(platform);
+        setSelectedPlatform(platform);
         setShowConfirmation(true);
         
         // Actualizar el valor con el username extraído
@@ -248,29 +252,75 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           
           <div className="space-y-2">
             <Label htmlFor="socialHandle">Main Social Handle</Label>
-            <div className="relative">
-              <Input
-                id="socialHandle"
-                name="socialHandle"
-                value={formData.socialHandle}
-                onChange={handleChange}
-                placeholder="@username or paste social media link"
-                className="w-full"
-              />
+            <div className="flex gap-3">
+              <div className="flex-1 relative">
+                <Input
+                  id="socialHandle"
+                  name="socialHandle"
+                  value={formData.socialHandle}
+                  onChange={handleChange}
+                  placeholder="@username or paste social media link"
+                  className="w-full"
+                />
+                
+                {/* Chip de confirmación */}
+                {showConfirmation && detectedPlatform && (
+                  <div className="absolute -top-8 left-0 right-0 flex justify-center">
+                    <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
+                      <div className="flex items-center gap-2">
+                        {getPlatformIcon(detectedPlatform)}
+                        <span className="text-xs font-medium">
+                          {getPlatformName(detectedPlatform)} detected!
+                        </span>
+                      </div>
+                    </Badge>
+                  </div>
+                )}
+              </div>
               
-              {/* Chip de confirmación */}
-              {showConfirmation && detectedPlatform && (
-                <div className="absolute -top-8 left-0 right-0 flex justify-center">
-                  <Badge variant="secondary" className="bg-green-100 text-green-800 border border-green-200 animate-in slide-in-from-bottom-2 duration-300">
+              <Select value={selectedPlatform || ''} onValueChange={(value) => setSelectedPlatform(value as SocialPlatform)}>
+                <SelectTrigger className="w-[140px]">
+                  <SelectValue placeholder={
                     <div className="flex items-center gap-2">
-                      {getPlatformIcon(detectedPlatform)}
-                      <span className="text-xs font-medium">
-                        {getPlatformName(detectedPlatform)} detected!
-                      </span>
+                      <Globe className="w-4 h-4" />
+                      <span>Platform</span>
                     </div>
-                  </Badge>
-                </div>
-              )}
+                  }>
+                    {selectedPlatform && (
+                      <div className="flex items-center gap-2">
+                        {getPlatformIcon(selectedPlatform)}
+                        <span className="hidden sm:inline">{getPlatformName(selectedPlatform)}</span>
+                      </div>
+                    )}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="twitter">
+                    <div className="flex items-center gap-2">
+                      <Twitter className="w-4 h-4" />
+                      <span>Twitter/X</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="linkedin">
+                    <div className="flex items-center gap-2">
+                      <Linkedin className="w-4 h-4" />
+                      <span>LinkedIn</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="instagram">
+                    <div className="flex items-center gap-2">
+                      <Instagram className="w-4 h-4" />
+                      <span>Instagram</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="other">
+                    <div className="flex items-center gap-2">
+                      <Globe className="w-4 h-4" />
+                      <span>Other</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           
