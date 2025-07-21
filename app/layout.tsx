@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   description: "Research assistance for content creators. Spend less time digging and more time creating.",
   keywords: "research, content creation, podcast research, interview preparation",
   authors: [{ name: "Eugenio Castro" }],
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   openGraph: {
     title: "Content Research",
@@ -31,6 +30,8 @@ export const metadata: Metadata = {
     description: "Research assistance for content creators."
   },
 };
+
+export const viewport = "width=device-width, initial-scale=1";
 
 export default function RootLayout({
   children,
