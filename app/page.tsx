@@ -52,23 +52,23 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
-      <div className="container mx-auto px-6 py-20 max-w-6xl">
-        <div className="flex flex-col items-center space-y-16">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 max-w-6xl">
+        <div className="flex flex-col items-center space-y-12 sm:space-y-16">
           
           {/* Hero Section */}
-          <div className="text-center space-y-6 max-w-2xl">
-            <h1 className="text-6xl md:text-7xl leading-tight text-gray-900 tracking-tight">
+          <div className="text-center space-y-4 sm:space-y-6 max-w-2xl px-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-gray-900 tracking-tight">
               Hi. I'm Eugenio
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed max-w-xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto">
               I handle research for creators so you can spend less time digging and more time creating.
             </p>
           </div>
 
           {/* Trusted By Section */}
-          <div className="w-full space-y-8">
-            <h2 className="text-3xl text-gray-900 text-center tracking-tight">
+          <div className="w-full space-y-6 sm:space-y-8">
+            <h2 className="text-2xl sm:text-3xl text-gray-900 text-center tracking-tight px-4">
               Trusted by
             </h2>
 
@@ -84,13 +84,13 @@ export default function App() {
           </div>
 
           {/* Call to Action */}
-          <div className="text-center space-y-8 max-w-xl">
-            <p className="text-xl text-gray-600 leading-relaxed">
+          <div className="text-center space-y-6 sm:space-y-8 max-w-xl px-4">
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
               I partner with a limited number of creators. Share a few details below to see if we're a match.
             </p>
 
             <Button 
-              className="bg-gray-900 text-white px-10 py-4 text-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md rounded-xl"
+              className="bg-gray-900 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md rounded-xl w-full sm:w-auto"
               size="lg"
               onClick={() => setIsModalOpen(true)}
             >
@@ -99,23 +99,23 @@ export default function App() {
           </div>
 
           {/* Footer Section */}
-          <div className="w-full flex justify-between items-center pt-8 border-t border-gray-200">
+          <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 pt-6 sm:pt-8 border-t border-gray-200 px-4">
             <a 
               href="https://x.com/eugenio_com_mx" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
-              <Twitter className="w-5 h-5" />
-              <span className="text-lg">X/Twitter</span>
+              <Twitter className="w-4 sm:w-5 h-4 sm:h-5" />
+              <span className="text-base sm:text-lg">X/Twitter</span>
             </a>
             
             <a 
               href="mailto:eugenio@castrogarza.com?subject=Research%20Collaboration%20Inquiry&body=Hi%20Eugenio,%0D%0A%0D%0AI'm%20interested%20in%20working%20together%20on%20research%20for%20my%20content.%0D%0A%0D%0A[Please%20tell%20me%20about%20your%20project%20and%20research%20needs]%0D%0A%0D%0ABest%20regards,"
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
-              <Mail className="w-5 h-5" />
-              <span className="text-lg">eugenio@castrogarza.com</span>
+              <Mail className="w-4 sm:w-5 h-4 sm:h-5" />
+              <span className="text-base sm:text-lg break-all sm:break-normal">eugenio@castrogarza.com</span>
             </a>
           </div>
 

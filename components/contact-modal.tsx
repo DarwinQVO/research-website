@@ -196,7 +196,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[95vw] sm:max-w-lg max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
         {showSuccessMessage ? (
           // Pantalla de confirmación
           <div className="flex flex-col items-center justify-center py-8 text-center">
@@ -287,28 +287,32 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             />
           </div>
           
-          <div className="flex gap-3 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Button 
               type="button" 
               variant="outline" 
               onClick={onClose} 
-              className="flex-1"
+              className="flex-1 order-2 sm:order-1"
               disabled={isSubmitting}
             >
               Cancel
             </Button>
             <Button 
               type="submit" 
-              className="flex-1" 
+              className="flex-1 order-1 sm:order-2" 
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Sending...
+                  <span className="hidden sm:inline">Sending...</span>
+                  <span className="sm:hidden">Sending</span>
                 </div>
               ) : (
-                'Send Message'
+                <>
+                  <span className="hidden sm:inline">Send Message</span>
+                  <span className="sm:hidden">Send</span>
+                </>
               )}
             </Button>
           </div>

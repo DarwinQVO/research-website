@@ -93,7 +93,7 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-gray-200 bg-white/80 backdrop-blur-sm px-8 py-6 md:w-[450px] shadow-sm min-h-[160px] flex"
+            className="relative w-[280px] sm:w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-gray-200 bg-white/80 backdrop-blur-sm px-6 sm:px-8 py-4 sm:py-6 md:w-[450px] shadow-sm min-h-[140px] sm:min-h-[160px] flex"
             key={item.name}
           >
             <blockquote className="flex flex-col justify-between h-full w-full">
@@ -102,21 +102,21 @@ export const InfiniteMovingCards = ({
                 className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               <div className="relative z-20 flex-1">
-                <span className="text-sm leading-[1.6] font-normal text-gray-700">
+                <span className="text-xs sm:text-sm leading-[1.6] font-normal text-gray-700">
                   "{item.quote}"
                 </span>
               </div>
-              <div className="relative z-20 flex flex-row items-center mt-4">
+              <div className="relative z-20 flex flex-row items-center mt-3 sm:mt-4">
                 <img
                   src={item.avatar}
                   alt={item.name}
-                  className="w-12 h-12 rounded-full object-cover mr-4 flex-shrink-0 ring-2 ring-gray-100"
+                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full object-cover mr-3 sm:mr-4 flex-shrink-0 ring-2 ring-gray-100"
                 />
-                <div className="flex flex-col justify-center min-h-[48px]">
-                  <span className="text-sm leading-[1.4] font-medium text-gray-900">
+                <div className="flex flex-col justify-center min-h-[40px] sm:min-h-[48px]">
+                  <span className="text-xs sm:text-sm leading-[1.4] font-medium text-gray-900">
                     {item.name}
                   </span>
-                  <span className="text-sm leading-[1.4] font-normal text-gray-500 mt-0.5">
+                  <span className="text-xs sm:text-sm leading-[1.4] font-normal text-gray-500 mt-0.5">
                     {item.title}
                   </span>
                 </div>
