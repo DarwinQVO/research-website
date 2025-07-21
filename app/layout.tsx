@@ -40,11 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/eugenio-icon.jpeg" type="image/jpeg" />
-        <link rel="icon" type="image/jpeg" sizes="32x32" href="/eugenio-icon.jpeg" />
-        <link rel="icon" type="image/jpeg" sizes="16x16" href="/eugenio-icon.jpeg" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/eugenio-icon.jpeg" />
-        <link rel="shortcut icon" href="/eugenio-icon.jpeg" />
+        <link rel="icon" href="/eugenio-icon.png" type="image/png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/eugenio-icon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/eugenio-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/eugenio-icon.png" />
+        <link rel="shortcut icon" href="/eugenio-icon.png" />
         <meta name="theme-color" content="#f8fafc" />
         <meta name="msapplication-TileColor" content="#f8fafc" />
         <meta name="google" content="notranslate" />
