@@ -113,7 +113,7 @@ export default function App() {
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
               <XLogo className="w-4 sm:w-5 h-4 sm:h-5" />
-              <span className="text-base sm:text-lg">X / Twitter</span>
+              <span className="text-base sm:text-lg">@eugenio_com_mx</span>
             </a>
             
             <a 
