@@ -248,11 +248,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         ) : (
           // Formulario normal
           <>
-            <DialogHeader>
-              <DialogTitle>Spend less time researching and more time creating.</DialogTitle>
-            </DialogHeader>
-        
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="fullName">Full Name *</Label>
             <Input
@@ -372,19 +368,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             />
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-3 pt-4">
-            <Button 
-              type="button" 
-              variant="outline" 
-              onClick={onClose} 
-              className="flex-1 order-2 sm:order-1"
-              disabled={isSubmitting}
-            >
-              Cancel
-            </Button>
+          <div className="flex justify-center pt-4">
             <Button 
               type="submit" 
-              className="flex-1 order-1 sm:order-2" 
+              className="w-full sm:w-auto px-8" 
               disabled={isSubmitting}
             >
               {isSubmitting ? (
