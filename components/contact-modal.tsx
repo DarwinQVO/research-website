@@ -277,7 +277,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="socialHandle">Main Social Handle</Label>
+            <Label htmlFor="socialHandle">Main Social Handle *</Label>
             <div className="flex items-stretch w-full relative">
               <button
                 type="button"
@@ -335,6 +335,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 onFocus={() => setShowDropdown(false)}
                 placeholder="@username or paste social media link"
                 className="flex-1 h-10 rounded-l-none border-l-0"
+                required
               />
               
               {showConfirmation && detectedPlatform && (
