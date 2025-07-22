@@ -277,7 +277,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="socialHandle">Main Social Handle *</Label>
+            <Label htmlFor="socialHandle">Main social handle *</Label>
             <div className="flex items-stretch w-full relative">
               <button
                 type="button"

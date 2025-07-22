@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+import { TestimonialAccordion } from "@/components/testimonial-accordion";
 import { ContactModal } from "@/components/contact-modal";
 import { Mail } from "lucide-react";
 import { XLogo } from "@/components/icons/XLogo";
@@ -78,15 +78,8 @@ export default function App() {
               Trusted by
             </h2>
 
-            {/* Infinite Moving Cards */}
-            <div className="flex justify-center">
-              <InfiniteMovingCards
-                items={testimonials}
-                direction="right"
-                speed="slow"
-                className="max-w-6xl"
-              />
-            </div>
+            {/* Testimonial Accordion */}
+            <TestimonialAccordion testimonials={testimonials} />
           </div>
 
           {/* Call to Action */}
