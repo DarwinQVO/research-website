@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { ContactModal } from "@/components/contact-modal";
-import { Twitter, Mail } from "lucide-react";
+import { X, Mail } from "lucide-react";
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,8 +111,8 @@ export default function App() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
-              <Twitter className="w-4 sm:w-5 h-4 sm:h-5" />
-              <span className="text-base sm:text-lg">X/Twitter</span>
+              <X className="w-4 sm:w-5 h-4 sm:h-5" />
+              <span className="text-base sm:text-lg">X</span>
             </a>
             
             <a 
