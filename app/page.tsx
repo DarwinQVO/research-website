@@ -16,7 +16,7 @@ export default function App() {
 
   const testimonials = [
     {
-      quote: "WIP",
+      quote: "Eugenio's research skills are unparalleled. For over two years, he was my secret weapon for preparing for the podcast.",
       name: "Sam Parr",
       title: "My First Million",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/0_y6ZQkgFIAd2auGvP_vks35f.png",
