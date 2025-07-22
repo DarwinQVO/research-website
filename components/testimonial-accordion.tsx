@@ -9,6 +9,7 @@ interface TestimonialAccordionProps {
     title: string;
     avatar: string;
     twitterUrl?: string;
+    showUrl?: string;
   }[];
 }
 
@@ -56,7 +57,19 @@ export function TestimonialAccordion({ testimonials }: TestimonialAccordionProps
                 ) : (
                   <p className="text-base font-medium text-gray-900">{item.name}</p>
                 )}
-                <p className="text-xs text-gray-500">{item.title}</p>
+                {item.showUrl ? (
+                  <a 
+                    href={item.showUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="hover:underline"
+                  >
+                    <p className="text-xs text-gray-500">{item.title}</p>
+                  </a>
+                ) : (
+                  <p className="text-xs text-gray-500">{item.title}</p>
+                )}
               </div>
             </div>
             <svg
