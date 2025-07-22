@@ -5,7 +5,8 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { Badge } from './ui/badge';
-import { Twitter, Linkedin, Instagram, Globe, Youtube } from 'lucide-react';
+import { Linkedin, Instagram, Globe, Youtube } from 'lucide-react';
+import { XLogo } from '@/components/icons/XLogo';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -202,7 +203,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const getPlatformIcon = (platform: SocialPlatform) => {
     switch (platform) {
-      case 'twitter': return <Twitter className="w-4 h-4" />;
+      case 'twitter': return <XLogo className="w-4 h-4" />;
       case 'linkedin': return <Linkedin className="w-4 h-4" />;
       case 'instagram': return <Instagram className="w-4 h-4" />;
       case 'youtube': return <Youtube className="w-4 h-4" />;
@@ -213,7 +214,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const getPlatformName = (platform: SocialPlatform) => {
     switch (platform) {
-      case 'twitter': return 'Twitter/X';
+      case 'twitter': return 'X / Twitter';
       case 'linkedin': return 'LinkedIn';
       case 'instagram': return 'Instagram';
       case 'youtube': return 'YouTube';
@@ -292,8 +293,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
                     onClick={() => {setSelectedPlatform('twitter'); setShowDropdown(false);}}
                   >
-                    <Twitter className="w-4 h-4" />
-                    <span className="text-sm">Twitter/X</span>
+                    <XLogo className="w-4 h-4" />
+                    <span className="text-sm">X / Twitter</span>
                   </div>
                   <div 
                     className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer"
