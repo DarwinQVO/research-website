@@ -16,7 +16,7 @@ export default function App() {
 
   const testimonials = [
     {
-      quote: "Eugenio's research skills are unparalleled. For over two years, he was my secret weapon for preparing for the podcast.",
+      quote: "Eugenio's research skills are unparalleled. For over two years, he was my secret weapon for preparing for the podcast",
       name: "Sam Parr",
       title: "My First Million",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/0_y6ZQkgFIAd2auGvP_vks35f.png",
@@ -34,7 +34,7 @@ export default function App() {
       showLogo: "https://res.cloudinary.com/dahyx29il/image/upload/v1752806915/ChatGPT_Image_17_jul_2025_01_51_49_p.m._kxczxy.png"
     },
     {
-      quote: "I've worked with several researchers, but Eugenio is on another level. He's saved us a ton of time and has helped us find insights we would not have found otherwise.",
+      quote: "I've worked with several researchers, but Eugenio is on another level. He's saved us a ton of time and has helped us find insights we would not have found otherwise",
       name: "Samir Chaudry",
       title: "Colin & Samir",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/e2ca14931f4b4a4786cd7151cf5d56ee_adq9hm.png",
@@ -78,8 +78,7 @@ export default function App() {
             </h1>
             
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              Hi, I&apos;m Eugenio. I do the research that makes interview guests ask<br className="hidden sm:inline" />
-              &ldquo;How did you know that?&rdquo; and keeps your comment section buzzing.
+              Hi, I&apos;m <a href="https://x.com/eugenio_com_mx" target="_blank" rel="noopener noreferrer" className="text-gray-900 font-medium hover:underline transition-colors duration-200">Eugenio</a>. I do the research that makes interview guests ask &ldquo;How did you know that?&rdquo; and keeps your comment section buzzing.
             </p>
           </div>
 

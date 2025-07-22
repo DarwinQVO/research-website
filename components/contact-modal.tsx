@@ -249,10 +249,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           // Formulario normal
           <>
             <DialogHeader>
-              <DialogTitle>Let&apos;s explore working together</DialogTitle>
-              <DialogDescription>
-                Tell me about your project and how I can help you spend less time researching and more time creating.
-              </DialogDescription>
+              <DialogTitle>Spend less time researching and more time creating.</DialogTitle>
             </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
