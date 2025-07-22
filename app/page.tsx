@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { TestimonialAccordion } from "@/components/testimonial-accordion";
+import { AccordionLayouts } from "@/components/accordion-layouts";
 import { ContactModal } from "@/components/contact-modal";
 import { Mail } from "lucide-react";
 import { XLogo } from "@/components/icons/XLogo";
@@ -21,7 +21,8 @@ export default function App() {
       title: "My First Million",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/0_y6ZQkgFIAd2auGvP_vks35f.png",
       twitterUrl: "https://x.com/thesamparr",
-      showUrl: "https://www.youtube.com/@MyFirstMillionPod"
+      showUrl: "https://www.youtube.com/@MyFirstMillionPod",
+      showLogo: "https://res.cloudinary.com/dahyx29il/image/upload/v1752806898/ChatGPT_Image_17_jul_2025_01_26_28_p.m._km3pvz.png"
     },
     {
       quote: "The difference between a good interview and a great one is preparation, and Eugenio helps me make sure I don't miss a thing",
@@ -29,7 +30,8 @@ export default function App() {
       title: "Lenny's Podcast",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129160/Lenny_Image_v4lqvn.png",
       twitterUrl: "https://x.com/lennysan",
-      showUrl: "https://www.youtube.com/@LennysPodcast"
+      showUrl: "https://www.youtube.com/@LennysPodcast",
+      showLogo: "https://res.cloudinary.com/dahyx29il/image/upload/v1752806915/ChatGPT_Image_17_jul_2025_01_51_49_p.m._kxczxy.png"
     },
     {
       quote: "I've worked with several researchers, but Eugenio is on another level. He's saved us a ton of time and has helped us find insights we would not have found otherwise.",
@@ -37,7 +39,8 @@ export default function App() {
       title: "Colin & Samir",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/e2ca14931f4b4a4786cd7151cf5d56ee_adq9hm.png",
       twitterUrl: "https://x.com/samirchaudry",
-      showUrl: "https://www.youtube.com/ColinandSamir"
+      showUrl: "https://www.youtube.com/ColinandSamir",
+      showLogo: "https://res.cloudinary.com/dahyx29il/image/upload/v1752806898/ChatGPT_Image_17_jul_2025_01_27_19_p.m._yv91c6.png"
     },
     {
       quote: "Eugenio has the researcher/learning gift. He's detail-oriented and always delivers on time",
@@ -45,7 +48,8 @@ export default function App() {
       title: "How I Write",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/David_Image_ilx5my.png",
       twitterUrl: "https://x.com/david_perell",
-      showUrl: "https://www.youtube.com/playlist?list=PLFxhXLgGkVzKCn23_g8qM19DMDgco8eNJ"
+      showUrl: "https://www.youtube.com/playlist?list=PLFxhXLgGkVzKCn23_g8qM19DMDgco8eNJ",
+      showLogo: "https://res.cloudinary.com/dahyx29il/image/upload/v1753203267/ChatGPT_Image_22_jul_2025_11_54_07_a.m._au4sac.png"
     },
     {
       quote: "Working with Eugenio is great—awesome research, hustle and energy",
@@ -53,7 +57,8 @@ export default function App() {
       title: "My First Million",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129188/3a4b390a-084e-4c71-a81e-56bd64d4f32a_https___bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_public_images_27cf0da8-77c8-4078-990d-493291f18d77_782x898_xh2900.avif",
       twitterUrl: "https://x.com/ShaanVP",
-      showUrl: "https://www.youtube.com/@MyFirstMillionPod"
+      showUrl: "https://www.youtube.com/@MyFirstMillionPod",
+      showLogo: "https://res.cloudinary.com/dahyx29il/image/upload/v1752806898/ChatGPT_Image_17_jul_2025_01_26_28_p.m._km3pvz.png"
     },
   ];
 
@@ -83,8 +88,8 @@ export default function App() {
               Trusted by
             </h2>
 
-            {/* Testimonial Accordion */}
-            <TestimonialAccordion testimonials={testimonials} />
+            {/* Accordion Layouts Testing */}
+            <AccordionLayouts testimonials={testimonials} />
           </div>
 
           {/* Call to Action */}
