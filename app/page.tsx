@@ -72,13 +72,14 @@ export default function App() {
         <div className="flex flex-col items-center space-y-12 sm:space-y-16">
           
           {/* Hero Section */}
-          <div className="text-center space-y-4 sm:space-y-6 max-w-2xl px-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-gray-900 tracking-tight">
-              Hi. I&apos;m Eugenio
+          <div className="text-center space-y-4 sm:space-y-6 max-w-3xl px-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-gray-900 tracking-tight whitespace-nowrap">
+              The Research Difference
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto">
-              I handle research for creators so you can spend less time digging and more time creating.
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              Hi, I&apos;m Eugenio. I do the research that makes interview guests ask<br className="hidden sm:inline" />
+              &ldquo;How did you know that?&rdquo; and keeps your comment section buzzing.
             </p>
           </div>
 
@@ -88,14 +89,14 @@ export default function App() {
               Trusted by
             </h2>
 
-            {/* Accordion Layouts Testing */}
+            {/* Accordion Layouts */}
             <AccordionLayouts testimonials={testimonials} />
           </div>
 
           {/* Call to Action */}
           <div className="text-center space-y-6 sm:space-y-8 max-w-xl px-4">
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-              I partner with a limited number of creators. Share a few details below to see if we&apos;re a match.
+              Limited spots available. Let&apos;s see if we&apos;re a fit.
             </p>
 
             <Button 
@@ -103,7 +104,7 @@ export default function App() {
               size="lg"
               onClick={() => setIsModalOpen(true)}
             >
-              Begin the Conversation
+              Reach Out
             </Button>
           </div>
 

@@ -56,10 +56,10 @@ export function AccordionLayouts({ testimonials }: AccordionLayoutsProps) {
                     onClick={(e) => e.stopPropagation()}
                     className="hover:underline"
                   >
-                    <span className="text-2xl font-medium text-gray-900">{item.name}</span>
+                    <span className="text-xl font-medium text-gray-900">{item.name}</span>
                   </a>
                 ) : (
-                  <span className="text-2xl font-medium text-gray-900">{item.name}</span>
+                  <span className="text-xl font-medium text-gray-900">{item.name}</span>
                 )}
                 {item.showUrl ? (
                   <a 
@@ -69,10 +69,10 @@ export function AccordionLayouts({ testimonials }: AccordionLayoutsProps) {
                     onClick={(e) => e.stopPropagation()}
                     className="hover:underline"
                   >
-                    <span className="text-lg text-gray-500">{item.title}</span>
+                    <span className="text-base text-gray-500">{item.title}</span>
                   </a>
                 ) : (
-                  <span className="text-lg text-gray-500">{item.title}</span>
+                  <span className="text-base text-gray-500">{item.title}</span>
                 )}
               </div>
             </div>
@@ -89,7 +89,7 @@ export function AccordionLayouts({ testimonials }: AccordionLayoutsProps) {
           </button>
           {expandedItems.has(idx) && (
             <div className="px-4 pb-3">
-              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
             </div>
           )}
         </div>
