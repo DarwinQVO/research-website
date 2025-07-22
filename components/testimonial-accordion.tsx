@@ -13,7 +13,7 @@ interface TestimonialAccordionProps {
 }
 
 export function TestimonialAccordion({ testimonials }: TestimonialAccordionProps) {
-  const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set([0]));
+  const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
 
   return (
     <div className="max-w-6xl mx-auto px-4 space-y-2">
@@ -72,7 +72,7 @@ export function TestimonialAccordion({ testimonials }: TestimonialAccordionProps
           </button>
           {expandedItems.has(idx) && (
             <div className="px-6 pb-4">
-              <p className="text-sm text-gray-700 leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
             </div>
           )}
         </div>
