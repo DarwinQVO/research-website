@@ -117,8 +117,15 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setIsSubmitting(true);
 
     try {
+      // Verificar que las variables de entorno existan
+      if (!process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID || !process.env.NEXT_PUBLIC_AIRTABLE_PAT) {
+        console.error('Missing environment variables for Airtable');
+        alert('Configuration error. Please contact e@eugeniocastro.com directly.');
+        return;
+      }
+
       // Llamada directa a Airtable desde el cliente para static export
-      const airtableUrl = `https://api.airtable.com/v0/${process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID}/${process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME}`;
+      const airtableUrl = `https://api.airtable.com/v0/${process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID}/Table%201`;
       
       const response = await fetch(airtableUrl, {
         method: 'POST',
