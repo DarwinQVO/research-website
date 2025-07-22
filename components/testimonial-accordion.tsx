@@ -51,10 +51,10 @@ export function TestimonialAccordion({ testimonials }: TestimonialAccordionProps
                     onClick={(e) => e.stopPropagation()}
                     className="hover:underline"
                   >
-                    <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                    <p className="text-base font-medium text-gray-900">{item.name}</p>
                   </a>
                 ) : (
-                  <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                  <p className="text-base font-medium text-gray-900">{item.name}</p>
                 )}
                 <p className="text-xs text-gray-500">{item.title}</p>
               </div>
