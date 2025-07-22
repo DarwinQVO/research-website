@@ -30,7 +30,7 @@ export default function App() {
       twitterUrl: "https://x.com/lennysan"
     },
     {
-      quote: "WIP",
+      quote: "I've worked with several researchers, but Eugenio is on another level. He's saved us a ton of time and has helped us find insights we would not have found otherwise.",
       name: "Samir Chaudry",
       title: "Colin & Samir",
       avatar: "https://res.cloudinary.com/dahyx29il/image/upload/v1753129180/e2ca14931f4b4a4786cd7151cf5d56ee_adq9hm.png",
