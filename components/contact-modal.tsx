@@ -158,11 +158,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       } else {
         const data = await response.json();
         console.error('Airtable error:', data);
-        alert('There was an issue submitting your request. Please try again or contact me directly at eugenio@castrogarza.com');
+        alert('There was an issue submitting your request. Please try again or contact me directly at e@eugeniocastro.com');
       }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('There was a connection error. Please try again or contact me directly at eugenio@castrogarza.com');
+      alert('There was a connection error. Please try again or contact me directly at e@eugeniocastro.com');
     } finally {
       setIsSubmitting(false);
     }

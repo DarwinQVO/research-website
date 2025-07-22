@@ -117,11 +117,11 @@ export default function App() {
             </a>
             
             <a 
-              href="mailto:eugenio@castrogarza.com?subject=Research%20Collaboration%20Inquiry&body=Hi%20Eugenio,%0D%0A%0D%0AI'm%20interested%20in%20working%20together%20on%20research%20for%20my%20content.%0D%0A%0D%0A[Please%20tell%20me%20about%20your%20project%20and%20research%20needs]%0D%0A%0D%0ABest%20regards,"
+              href="mailto:e@eugeniocastro.com?subject=Research%20Collaboration%20Inquiry&body=Hi%20Eugenio,%0D%0A%0D%0AI'm%20interested%20in%20working%20together%20on%20research%20for%20my%20content.%0D%0A%0D%0A[Please%20tell%20me%20about%20your%20project%20and%20research%20needs]%0D%0A%0D%0ABest%20regards,"
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
               <Mail className="w-4 sm:w-5 h-4 sm:h-5" />
-              <span className="text-base sm:text-lg break-all sm:break-normal">eugenio@castrogarza.com</span>
+              <span className="text-base sm:text-lg break-all sm:break-normal">e@eugeniocastro.com</span>
             </a>
           </div>
 
