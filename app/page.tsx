@@ -32,7 +32,7 @@ export default function App() {
     if (typeof window !== 'undefined' && window.Tally) {
       window.Tally.openPopup('n9ALOV', {
         layout: 'modal',
-        width: 700,
+        width: 500,
         overlay: true,
         emoji: {
           text: '👋',
