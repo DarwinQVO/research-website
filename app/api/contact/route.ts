@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
+  // Add CORS headers for broader browser compatibility
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   try {
     const body = await request.json();
     const { fullName, email, socialHandle, description, platform } = body;
@@ -45,21 +52,36 @@ export async function POST(request: NextRequest) {
     if (airtableResponse.ok) {
       return NextResponse.json(
         { message: 'Contact submitted successfully' },
-        { status: 200 }
+        { status: 200, headers: corsHeaders }
       );
     } else {
       const airtableError = await airtableResponse.json();
       console.error('Airtable error:', airtableError);
       return NextResponse.json(
         { error: 'Failed to submit contact' },
-        { status: 500 }
+        { status: 500, headers: corsHeaders }
       );
     }
   } catch (error) {
     console.error('Contact API error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     );
   }
+}
+
+// Handle OPTIONS request for CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    }
+  );
 }
