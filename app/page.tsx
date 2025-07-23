@@ -101,18 +101,18 @@ export default function App() {
           
           {/* Hero Section */}
           <div className="text-center space-y-4 sm:space-y-6 max-w-3xl px-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-gray-900 tracking-tight whitespace-nowrap">
+            <h1 className="text-[52px] leading-tight text-gray-900 tracking-tight whitespace-nowrap">
               The Research Advantage
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[17px] text-gray-600 leading-relaxed max-w-2xl mx-auto">
               Hi, I&apos;m <a href="https://x.com/eugenio_com_mx" target="_blank" rel="noopener noreferrer" className="text-gray-900 font-medium hover:underline transition-colors duration-200">Eugenio</a>. I handle research for content creators. Research that makes guests ask, &ldquo;How did you find that?&rdquo; and turns audiences into superfans.
             </p>
           </div>
 
           {/* Trusted By Section */}
           <div className="w-full space-y-6 sm:space-y-8">
-            <h2 className="text-xl sm:text-2xl text-gray-900 text-center tracking-tight px-4">
+            <h2 className="text-[15px] text-gray-900 text-center tracking-tight px-4">
               Trusted by
             </h2>
 
