@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Removed output: 'export' to enable API routes
+  output: 'export', // Static export works with Cloudflare Functions
   trailingSlash: true,
   images: {
     unoptimized: true
