@@ -39,7 +39,7 @@ export function AccordionLayouts({ testimonials }: AccordionLayoutsProps) {
         >
           <button
             onClick={() => toggleExpanded(idx)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-100 transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:border-gray-300 hover:shadow-sm transition-all duration-200"
           >
             <div className="flex items-center space-x-3">
               <img

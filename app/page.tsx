@@ -112,7 +112,7 @@ export default function App() {
 
           {/* Trusted By Section */}
           <div className="w-full space-y-6 sm:space-y-8">
-            <h2 className="text-2xl sm:text-3xl text-gray-900 text-center tracking-tight px-4">
+            <h2 className="text-xl sm:text-2xl text-gray-900 text-center tracking-tight px-4">
               Trusted by
             </h2>
 
@@ -127,7 +127,7 @@ export default function App() {
             </p>
 
             <Button 
-              className="bg-gray-900 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md rounded-xl w-full sm:w-auto"
+              className="bg-gray-900 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg hover:bg-gray-800 hover:scale-105 transition-all duration-200 shadow-sm hover:shadow-md rounded-xl w-full sm:w-auto"
               size="lg"
               onClick={handleOpenTally}
             >
@@ -148,9 +148,8 @@ export default function App() {
             
             <a 
               href="mailto:e@eugeniocastro.com?subject=Research%20Collaboration%20Inquiry&body=Hi%20Eugenio,%0D%0A%0D%0AI'm%20interested%20in%20working%20together%20on%20research%20for%20my%20content.%0D%0A%0D%0A[Please%20tell%20me%20about%20your%20project%20and%20research%20needs]%0D%0A%0D%0ABest%20regards,"
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+              className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
-              <Mail className="w-4 sm:w-5 h-4 sm:h-5" />
               <span className="text-base sm:text-lg break-all sm:break-normal">e@eugeniocastro.com</span>
             </a>
           </div>
