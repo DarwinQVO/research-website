@@ -2,17 +2,45 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AccordionLayouts } from "@/components/accordion-layouts";
-import { ContactModal } from "@/components/contact-modal";
 import { Mail } from "lucide-react";
 import { XLogo } from "@/components/icons/XLogo";
 
+declare global {
+  interface Window {
+    Tally?: {
+      openPopup: (formId: string, options?: {
+        layout?: string;
+        width?: number;
+        overlay?: boolean;
+        emoji?: {
+          text: string;
+          animation: string;
+        };
+      }) => void;
+    };
+  }
+}
+
 export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const handleOpenTally = () => {
+    if (typeof window !== 'undefined' && window.Tally) {
+      window.Tally.openPopup('n9ALOV', {
+        layout: 'modal',
+        width: 700,
+        overlay: true,
+        emoji: {
+          text: '👋',
+          animation: 'wave'
+        }
+      });
+    }
+  };
 
   const testimonials = [
     {
@@ -101,7 +129,7 @@ export default function App() {
             <Button 
               className="bg-gray-900 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md rounded-xl w-full sm:w-auto"
               size="lg"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleOpenTally}
             >
               Reach Out
             </Button>
@@ -130,12 +158,6 @@ export default function App() {
 
         </div>
       </div>
-      
-      {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
     </div>
   );
 }
