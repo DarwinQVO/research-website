@@ -102,11 +102,11 @@ export default function App() {
           {/* Hero Section */}
           <div className="text-center space-y-4 sm:space-y-6 max-w-3xl px-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-gray-900 tracking-tight whitespace-nowrap">
-              The Research Difference
+              The Research Advantage
             </h1>
             
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              Hi, I&apos;m <a href="https://x.com/eugenio_com_mx" target="_blank" rel="noopener noreferrer" className="text-gray-900 font-medium hover:underline transition-colors duration-200">Eugenio</a>. I do the research that makes interview guests ask &ldquo;How did you know that?&rdquo; and keeps your comment section buzzing.
+              Hi, I&apos;m <a href="https://x.com/eugenio_com_mx" target="_blank" rel="noopener noreferrer" className="text-gray-900 font-medium hover:underline transition-colors duration-200">Eugenio</a>. I handle research for content creators. Research that makes guests ask, &ldquo;How did you find that?&rdquo; and turns audiences into superfans.
             </p>
           </div>
 
@@ -141,9 +141,8 @@ export default function App() {
               href="https://x.com/eugenio_com_mx" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+              className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
-              <XLogo className="w-4 sm:w-5 h-4 sm:h-5" />
               <span className="text-base sm:text-lg">@eugenio_com_mx</span>
             </a>
             
