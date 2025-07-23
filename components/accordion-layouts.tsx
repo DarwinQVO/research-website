@@ -33,13 +33,13 @@ export function AccordionLayouts({ testimonials }: AccordionLayoutsProps) {
       {testimonials.map((item, idx) => (
         <div
           key={idx}
-          className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 ${
+          className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 hover:border-gray-400 hover:shadow-sm ${
             expandedItems.has(idx) ? 'bg-white shadow-sm' : 'bg-gray-50'
           }`}
         >
           <button
             onClick={() => toggleExpanded(idx)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+            className="w-full px-4 py-3 flex items-center justify-between transition-all duration-200"
           >
             <div className="flex items-center space-x-3">
               <img
