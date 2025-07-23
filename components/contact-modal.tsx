@@ -7,6 +7,23 @@ interface ContactModalProps {
 }
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const handleOpenTally = () => {
+    // Close our modal first
+    onClose();
+    
+    // Open Tally popup as centered modal
+    if (typeof window !== 'undefined' && (window as any).Tally) {
+      (window as any).Tally.openPopup('n9ALOV', {
+        layout: 'modal',
+        width: 700,
+        emoji: {
+          text: '👋',
+          animation: 'wave'
+        }
+      });
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[95vw] sm:max-w-lg max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
@@ -15,10 +32,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <Button 
             type="button" 
             className="w-full sm:w-auto px-8" 
-            data-tally-open="n9ALOV" 
-            data-tally-emoji-text="👋" 
-            data-tally-emoji-animation="wave"
-            onClick={onClose}
+            onClick={handleOpenTally}
           >
             <span className="hidden sm:inline">Send Message</span>
             <span className="sm:hidden">Send</span>
