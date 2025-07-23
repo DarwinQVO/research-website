@@ -6,14 +6,29 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
+declare global {
+  interface Window {
+    Tally?: {
+      openPopup: (formId: string, options?: {
+        layout?: string;
+        width?: number;
+        emoji?: {
+          text: string;
+          animation: string;
+        };
+      }) => void;
+    };
+  }
+}
+
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleOpenTally = () => {
     // Close our modal first
     onClose();
     
     // Open Tally popup as centered modal
-    if (typeof window !== 'undefined' && (window as any).Tally) {
-      (window as any).Tally.openPopup('n9ALOV', {
+    if (typeof window !== 'undefined' && window.Tally) {
+      window.Tally.openPopup('n9ALOV', {
         layout: 'modal',
         width: 700,
         emoji: {
